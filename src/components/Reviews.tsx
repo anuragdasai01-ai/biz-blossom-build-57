@@ -61,10 +61,19 @@ export function Reviews() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  // When the user interacts, stop the drift and align the row to the nearest
+  // card so manual browsing starts from a clean position.
   const pause = useCallback(() => {
     setPaused(true);
     if (resumeTimer.current) clearTimeout(resumeTimer.current);
     resumeTimer.current = setTimeout(() => setPaused(false), RESUME_DELAY_MS);
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector("figure");
+    if (!card) return;
+    const step = card.getBoundingClientRect().width + 20; // card + gap
+    const target = Math.round(track.scrollLeft / step) * step;
+    track.scrollTo({ left: target, behavior: "smooth" });
   }, []);
 
   // Continuous drift: rAF advances scrollLeft, wrapping seamlessly across the
@@ -147,7 +156,7 @@ export function Reviews() {
             role="region"
             aria-label="Client testimonials carousel"
           >
-            <div className="flex w-max gap-5 [scroll-snap-type:x_mandatory]">
+            <div className="flex w-max gap-5">
               {[...testimonials, ...testimonials].map((t, i) => (
                 <TestimonialCard
                   key={`${t.name}-${i}`}
