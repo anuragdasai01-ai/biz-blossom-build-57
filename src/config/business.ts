@@ -76,3 +76,44 @@ export const serviceCategories = [
 
 export const packages: { name: string; includes: string[] }[] = [];
 export const packagesEnabled = packages.length > 0;
+
+// PLACEHOLDER testimonials — replace each quote/name with a real Google review
+// before treating this section as live customer feedback.
+export interface Testimonial {
+  quote: string;
+  name: string;
+  service: string;
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "A lovely experience from start to finish — gentle, patient and attentive. I left feeling completely refreshed.",
+    name: "Priya S.",
+    service: "Glow Facial",
+  },
+  {
+    quote:
+      "The styling was exactly what I had in mind. Everything was explained nicely and done with real care.",
+    name: "Neha K.",
+    service: "Haircut & Styling",
+  },
+  {
+    quote:
+      "Such a calm, comfortable place. The threading was neat and quick, and the staff were very kind.",
+    name: "Simran R.",
+    service: "Threading",
+  },
+  {
+    quote:
+      "I felt looked after the whole time. Soft, natural makeup that stayed beautiful all evening.",
+    name: "Anjali M.",
+    service: "Party Makeup",
+  },
+  {
+    quote:
+      "Warm, welcoming and professional. Booking was easy and the appointment ran right on time.",
+    name: "Ritika D.",
+    service: "Hair Spa",
+  },
+];
