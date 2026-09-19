@@ -76,22 +76,24 @@ export function Reviews() {
     track.scrollTo({ left: target, behavior: "smooth" });
   }, []);
 
-  // Continuous drift: rAF advances scrollLeft, wrapping seamlessly across the
-  // duplicated card list. Paused while the user is interacting.
+  // Continuous drift: rAF advances scroll position, wrapping seamlessly across
+  // the duplicated card list. Paused while the user is interacting.
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
     let raf = 0;
+    let acc = track.scrollLeft;
     const step = () => {
       if (!paused && !reducedMotion.current) {
         const half = track.scrollWidth / 2;
         if (half > 0) {
-          track.scrollLeft += DRIFT_SPEED;
-          if (track.scrollLeft >= half) {
-            track.scrollLeft -= half;
-          }
+          acc += DRIFT_SPEED;
+          if (acc >= half) acc -= half;
+          track.scrollLeft = acc;
         }
+      } else {
+        acc = track.scrollLeft;
       }
       raf = requestAnimationFrame(step);
     };
