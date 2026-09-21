@@ -35,7 +35,7 @@ export function Hero() {
           Beautifully Yours.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          A ladies' beauty parlour in Durga Colony, Rohtak — makeup, hair, skin care and grooming
+          A ladies' beauty parlour in Rohtak — makeup, hair, skin care and grooming
           with the personal attention you deserve.
         </p>
 
