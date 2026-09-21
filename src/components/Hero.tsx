@@ -35,24 +35,18 @@ export function Hero() {
           Beautifully Yours.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          A ladies' beauty parlour in Durga Colony, Rohtak — makeup, hair, skin care and grooming
+          A ladies' beauty parlour in Rohtak — makeup, hair, skin care and grooming
           with the personal attention you deserve.
         </p>
 
-        <div className="mt-5">
-          <div className="flex flex-wrap items-center gap-3">
-            <Star className="h-6 w-6 fill-primary text-primary" />
-            <span className="font-display text-3xl font-bold leading-none text-foreground sm:text-4xl">
-              {business.rating.value}
-            </span>
-            <span className="font-display text-2xl font-bold leading-none text-foreground sm:text-3xl">
-              <span className="text-primary">{business.rating.count}</span>{" "}
-              Google reviews
-            </span>
-          </div>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Durga Colony, Rohtak
-          </p>
+        <div className="mt-5 flex items-center gap-3">
+          <Star className="h-5 w-5 fill-primary text-primary" />
+          <span className="font-display text-xl font-semibold leading-none text-foreground sm:text-2xl">
+            {business.rating.value}
+          </span>
+          <span className="font-display text-lg font-medium leading-none text-foreground sm:text-xl">
+            · {business.rating.count} Google reviews
+          </span>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
