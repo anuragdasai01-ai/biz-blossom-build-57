@@ -39,11 +39,20 @@ export function Hero() {
           with the personal attention you deserve.
         </p>
 
-        <div className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
-          <Star className="h-4 w-4 fill-primary text-primary" />
-          <span className="font-medium text-foreground">{business.rating.value}</span>
-          <span>· {business.rating.count} Google reviews</span>
-          <span className="hidden sm:inline">· Durga Colony, Rohtak</span>
+        <div className="mt-5">
+          <div className="flex flex-wrap items-center gap-3">
+            <Star className="h-6 w-6 fill-primary text-primary" />
+            <span className="font-display text-3xl font-bold leading-none text-foreground sm:text-4xl">
+              {business.rating.value}
+            </span>
+            <span className="font-display text-2xl font-bold leading-none text-foreground sm:text-3xl">
+              <span className="text-primary">{business.rating.count}</span>{" "}
+              Google reviews
+            </span>
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Durga Colony, Rohtak
+          </p>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
