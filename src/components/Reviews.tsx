@@ -137,8 +137,8 @@ export function Reviews() {
           <p className="mt-4 font-display text-5xl font-semibold text-foreground">
             {business.rating.value}
           </p>
-          <p className="mt-2 text-muted-foreground">
-            Based on {business.rating.count} reviews on Google
+          <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">
+            Based on <span className="text-primary">{business.rating.count}</span> reviews on Google
           </p>
           <a
             href={business.mapsUrl}
