@@ -40,12 +40,12 @@ export function Hero() {
         </p>
 
         <div className="mt-5 flex items-center gap-3">
-          <Star className="h-5 w-5 fill-primary text-primary" />
           <span className="font-display text-xl font-semibold leading-none text-foreground sm:text-2xl">
             {business.rating.value}
           </span>
+          <Star className="h-5 w-5 fill-primary text-primary" />
           <span className="font-display text-lg font-medium leading-none text-foreground sm:text-xl">
-            · {business.rating.count} Google reviews
+            <span className="text-xl font-semibold sm:text-2xl">{business.rating.count}</span> Google reviews
           </span>
         </div>
 
