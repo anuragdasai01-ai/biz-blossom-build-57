@@ -43,7 +43,7 @@ export const links = {
     time: string;
     name: string;
     phone: string;
-    notes?: string;
+    notes?: string | undefined;
   }) =>
     `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
       [
