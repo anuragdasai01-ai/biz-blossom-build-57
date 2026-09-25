@@ -60,7 +60,24 @@ export function BookingDialog() {
   };
 
   const today = new Date().toISOString().split("T")[0];
-  const summary = `${service} · ${date}${time ? ` · ${time.split(" (")[0]}` : ""}`;
+  const prettyDate = date
+    ? new Date(`${date}T00:00:00`).toLocaleDateString("en-IN", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : "";
+  const timeShort = time.split(" (")[0];
+  const summary = `${service} · ${prettyDate}${time ? ` · ${timeShort}` : ""}`;
+  const bookingDetails = {
+    service,
+    date: prettyDate || date,
+    time,
+    name: name.trim(),
+    phone: phone.trim(),
+    notes: notes.trim() || undefined,
+  };
 
   return (
     <div
