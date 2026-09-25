@@ -37,6 +37,30 @@ export const links = {
         ? `Hi, I'd like to book an appointment at ${business.name}. I would like to enquire about ${service}.`
         : `Hi, I'd like to book an appointment at ${business.name}.`,
     )}`,
+  whatsappBooking: (details: {
+    service: string;
+    date: string;
+    time: string;
+    name: string;
+    phone: string;
+    notes?: string | undefined;
+  }) =>
+    `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
+      [
+        `Hi, I'd like to book an appointment at ${business.name}.`,
+        ``,
+        `Service: ${details.service}`,
+        `Preferred date: ${details.date}`,
+        `Preferred time: ${details.time}`,
+        `Name: ${details.name}`,
+        `Phone: ${details.phone}`,
+        details.notes ? `Notes: ${details.notes}` : ``,
+        ``,
+        `Please confirm my appointment. Thank you!`,
+      ]
+        .filter((l) => l !== undefined)
+        .join("\n"),
+    )}`,
   directions: business.mapsUrl,
 };
 

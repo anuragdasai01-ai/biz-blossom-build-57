@@ -13,6 +13,7 @@ export function BookingDialog() {
   const [time, setTime] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [notes, setNotes] = useState("");
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,6 +27,7 @@ export function BookingDialog() {
       setTime("");
       setName("");
       setPhone("");
+      setNotes("");
     }
   }, [open, preselectedService]);
 
@@ -58,7 +60,24 @@ export function BookingDialog() {
   };
 
   const today = new Date().toISOString().split("T")[0];
-  const summary = `${service} · ${date}${time ? ` · ${time.split(" (")[0]}` : ""}`;
+  const prettyDate = date
+    ? new Date(`${date}T00:00:00`).toLocaleDateString("en-IN", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : "";
+  const timeShort = time.split(" (")[0];
+  const summary = `${service} · ${prettyDate}${time ? ` · ${timeShort}` : ""}`;
+  const bookingDetails = {
+    service,
+    date: prettyDate || date,
+    time,
+    name: name.trim(),
+    phone: phone.trim(),
+    notes: notes.trim() || undefined,
+  };
 
   return (
     <div
@@ -76,12 +95,33 @@ export function BookingDialog() {
               Appointment Request Received
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Thank you, {name.split(" ")[0]}! We've received your request for{" "}
-              <span className="font-medium text-foreground">{service}</span> on {date}. We'll
-              contact you shortly to confirm your appointment.
+              Thank you, {name.split(" ")[0]}! We've received your request. We'll contact you
+              shortly to confirm your appointment.
             </p>
+            <dl className="mx-auto mt-5 max-w-xs space-y-2 rounded-2xl bg-accent px-5 py-4 text-left text-sm">
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Service</dt>
+                <dd className="text-right font-medium text-foreground">{service}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Date</dt>
+                <dd className="text-right font-medium text-foreground">{prettyDate}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Time</dt>
+                <dd className="text-right font-medium text-foreground">{time}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Name</dt>
+                <dd className="text-right font-medium text-foreground">{name}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Phone</dt>
+                <dd className="text-right font-medium text-foreground">{phone}</dd>
+              </div>
+            </dl>
             <a
-              href={links.whatsapp(service)}
+              href={links.whatsappBooking(bookingDetails)}
               target="_blank"
               rel="noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary px-5 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-accent"
@@ -219,6 +259,19 @@ export function BookingDialog() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. 98765 43210"
                       className="w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="bk-notes" className="mb-1.5 block text-sm font-medium text-foreground">
+                      Anything we should know? <span className="font-normal text-muted-foreground">(optional)</span>
+                    </label>
+                    <textarea
+                      id="bk-notes"
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder="e.g. occasion, preferred artist, allergies…"
+                      rows={2}
+                      className="w-full resize-none rounded-xl border border-input bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                     />
                   </div>
                 </div>
