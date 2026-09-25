@@ -95,12 +95,33 @@ export function BookingDialog() {
               Appointment Request Received
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Thank you, {name.split(" ")[0]}! We've received your request for{" "}
-              <span className="font-medium text-foreground">{service}</span> on {date}. We'll
-              contact you shortly to confirm your appointment.
+              Thank you, {name.split(" ")[0]}! We've received your request. We'll contact you
+              shortly to confirm your appointment.
             </p>
+            <dl className="mx-auto mt-5 max-w-xs space-y-2 rounded-2xl bg-accent px-5 py-4 text-left text-sm">
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Service</dt>
+                <dd className="text-right font-medium text-foreground">{service}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Date</dt>
+                <dd className="text-right font-medium text-foreground">{prettyDate}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Time</dt>
+                <dd className="text-right font-medium text-foreground">{time}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Name</dt>
+                <dd className="text-right font-medium text-foreground">{name}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt className="text-muted-foreground">Phone</dt>
+                <dd className="text-right font-medium text-foreground">{phone}</dd>
+              </div>
+            </dl>
             <a
-              href={links.whatsapp(service)}
+              href={links.whatsappBooking(bookingDetails)}
               target="_blank"
               rel="noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary px-5 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-accent"
