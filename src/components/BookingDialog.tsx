@@ -13,6 +13,7 @@ export function BookingDialog() {
   const [time, setTime] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [notes, setNotes] = useState("");
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,6 +27,7 @@ export function BookingDialog() {
       setTime("");
       setName("");
       setPhone("");
+      setNotes("");
     }
   }, [open, preselectedService]);
 
