@@ -261,6 +261,19 @@ export function BookingDialog() {
                       className="w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                     />
                   </div>
+                  <div>
+                    <label htmlFor="bk-notes" className="mb-1.5 block text-sm font-medium text-foreground">
+                      Anything we should know? <span className="font-normal text-muted-foreground">(optional)</span>
+                    </label>
+                    <textarea
+                      id="bk-notes"
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      placeholder="e.g. occasion, preferred artist, allergies…"
+                      rows={2}
+                      className="w-full resize-none rounded-xl border border-input bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    />
+                  </div>
                 </div>
               )}
 
