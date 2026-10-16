@@ -20,7 +20,7 @@ export function Hero() {
           alt={`Inside ${business.fullName}`}
           width={1920}
           height={1280}
-          className="h-full w-full object-cover"
+          className="hero-kenburns h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30" />
       </div>
@@ -29,7 +29,7 @@ export function Hero() {
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
           {business.tagline}
         </p>
-        <h1 className="mt-4 max-w-2xl font-display text-5xl font-semibold leading-[1.05] text-foreground sm:text-6xl lg:text-7xl">
+        <h1 className="hero-shimmer mt-4 max-w-2xl font-display text-5xl font-semibold leading-[1.05] text-foreground sm:text-6xl lg:text-7xl">
           Your Beauty,
           <br />
           Beautifully Yours.
@@ -43,7 +43,7 @@ export function Hero() {
           <span className="font-display text-xl font-semibold leading-none text-foreground sm:text-2xl">
             {business.rating.value}
           </span>
-          <Star className="h-5 w-5 fill-primary text-primary" />
+          <Star className="hero-twinkle h-5 w-5 fill-primary text-primary" />
           <span className="font-display text-lg font-medium leading-none text-foreground sm:text-xl">
             <span className="text-xl font-semibold sm:text-2xl">{business.rating.count}</span> Google reviews
           </span>
@@ -52,7 +52,7 @@ export function Hero() {
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <button
             onClick={() => openBooking()}
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-md transition-all hover:opacity-90"
+            className="hero-pulse inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-md transition-all hover:opacity-90"
           >
             <CalendarCheck className="h-4 w-4" /> Book Appointment
           </button>
