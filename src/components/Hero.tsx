@@ -23,12 +23,20 @@ export function Hero() {
           className="hero-kenburns h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+          <span className="hero-orb left-[-6rem] top-[10%] h-72 w-72 bg-accent" />
+          <span className="hero-orb hero-orb-2 right-[-4rem] bottom-[8%] h-80 w-80 bg-secondary" />
+          {[12, 28, 46, 63, 78, 90].map((left, i) => (
+            <span key={left} className="hero-sparkle" style={{ left: `${left}%`, animationDelay: `${i * 1.3}s` }} />
+          ))}
+        </div>
       </div>
 
       <div className="hero-in relative mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-center px-4 pb-16 pt-28 sm:px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
           {business.tagline}
         </p>
+        <span aria-hidden="true" className="hero-line mt-4 block h-px w-24 bg-primary/60" />
         <h1 className="hero-shimmer mt-4 max-w-2xl font-display text-5xl font-semibold leading-[1.05] text-foreground sm:text-6xl lg:text-7xl">
           Your Beauty,
           <br />
