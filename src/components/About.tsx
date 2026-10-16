@@ -9,7 +9,7 @@ export function About() {
   return (
     <section id="about" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-        <div data-reveal className="relative">
+        <div data-reveal="left" className="relative">
           <div className="overflow-hidden rounded-3xl shadow-lg">
             <img
               src={aboutImg}
@@ -26,7 +26,7 @@ export function About() {
           </div>
         </div>
 
-        <div data-reveal>
+        <div data-reveal="right">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">About Us</p>
           <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
             Care, skill and a personal touch

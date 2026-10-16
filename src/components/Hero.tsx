@@ -25,7 +25,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-center px-4 pb-16 pt-28 sm:px-6">
+      <div className="hero-in relative mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-center px-4 pb-16 pt-28 sm:px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
           {business.tagline}
         </p>

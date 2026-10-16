@@ -56,7 +56,7 @@ export function Gallery() {
         {shown.map((item) => (
           <figure
             key={item.alt}
-            data-reveal
+            data-reveal="zoom"
             className="group relative overflow-hidden rounded-2xl shadow-sm"
           >
             <img

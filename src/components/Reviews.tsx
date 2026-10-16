@@ -118,7 +118,7 @@ export function Reviews() {
   return (
     <section id="reviews" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div data-reveal className="mx-auto max-w-3xl rounded-3xl border bg-card p-8 text-center shadow-sm sm:p-14">
+        <div data-reveal="zoom" className="mx-auto max-w-3xl rounded-3xl border bg-card p-8 text-center shadow-sm sm:p-14">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
             What Clients Say
           </p>

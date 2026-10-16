@@ -19,7 +19,22 @@ export function useRevealRoot<T extends HTMLElement>() {
       },
       { threshold: 0.12 },
     );
-    els.forEach((el) => observer.observe(el));
+    els.forEach((el) => {
+      // Stagger siblings (cards in a grid) so they cascade in one after another.
+      const siblings = el.parentElement
+        ? Array.from(el.parentElement.children).filter((c) => c.hasAttribute("data-reveal"))
+        : [];
+      const idx = siblings.indexOf(el);
+      if (idx > 0) el.style.transitionDelay = `${Math.min(idx, 6) * 90}ms`;
+      el.addEventListener(
+        "transitionend",
+        () => {
+          el.style.transitionDelay = "";
+        },
+        { once: true },
+      );
+      observer.observe(el);
+    });
     return () => observer.disconnect();
   }, []);
 

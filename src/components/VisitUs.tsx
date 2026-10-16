@@ -18,7 +18,7 @@ export function VisitUs() {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          <div data-reveal className="space-y-6">
+          <div data-reveal="left" className="space-y-6">
             <div className="rounded-2xl border bg-card p-6 shadow-sm">
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
@@ -84,7 +84,7 @@ export function VisitUs() {
             </div>
           </div>
 
-          <div data-reveal className="overflow-hidden rounded-3xl border shadow-sm">
+          <div data-reveal="right" className="overflow-hidden rounded-3xl border shadow-sm">
             <iframe
               title={`Map showing ${business.fullName}`}
               src={business.mapsEmbed}
