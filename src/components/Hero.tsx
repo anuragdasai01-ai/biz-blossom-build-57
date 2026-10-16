@@ -14,6 +14,15 @@ export function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden">
+      <div aria-hidden="true" className="hero-intro fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background">
+        <span className="hero-intro-name px-6 text-center font-display text-4xl font-semibold tracking-wide text-foreground sm:text-5xl">
+          {business.name}
+        </span>
+        <span className="hero-intro-line mt-4 block h-px w-32 bg-primary" />
+        <span className="hero-intro-tag mt-4 text-[10px] font-semibold uppercase tracking-[0.4em] text-primary">
+          Rohtak
+        </span>
+      </div>
       <div className="absolute inset-0">
         <img
           src={heroImg}
