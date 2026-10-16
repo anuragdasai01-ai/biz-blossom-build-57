@@ -61,7 +61,9 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@property --intro { syntax: '<time>'; inherits: true; initial-value: 0s; }
 :root {
+  --intro: 1.5s;
   --radius: 0.75rem;
   --background: oklch(0.975 0.008 85); /* warm ivory */
   --foreground: oklch(0.28 0.025 45); /* deep brown-charcoal */
@@ -184,12 +186,12 @@
     opacity: 0;
     animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
-  .hero-in > *:nth-child(1) { animation-delay: 0.1s; }
-  .hero-in > *:nth-child(2) { animation-delay: 0.25s; }
-  .hero-in > *:nth-child(3) { animation-delay: 0.4s; }
-  .hero-in > *:nth-child(4) { animation-delay: 0.5s; }
-  .hero-in > *:nth-child(5) { animation-delay: 0.6s; }
-  .hero-in > *:nth-child(6) { animation-delay: 0.7s; }
+  .hero-in > *:nth-child(1) { animation-delay: calc(0.1s + var(--intro)); }
+  .hero-in > *:nth-child(2) { animation-delay: calc(0.25s + var(--intro)); }
+  .hero-in > *:nth-child(3) { animation-delay: calc(0.4s + var(--intro)); }
+  .hero-in > *:nth-child(4) { animation-delay: calc(0.5s + var(--intro)); }
+  .hero-in > *:nth-child(5) { animation-delay: calc(0.6s + var(--intro)); }
+  .hero-in > *:nth-child(6) { animation-delay: calc(0.7s + var(--intro)); }
   .hero-kenburns { animation: hero-zoom 1.6s ease-out both, hero-drift 24s ease-in-out 1.6s infinite alternate; }
   .hero-shimmer {
     background: linear-gradient(100deg, var(--foreground) 40%, var(--primary) 50%, var(--foreground) 60%);
@@ -213,6 +215,14 @@
   @keyframes hero-float { from { transform: translate(0,0) scale(1); } to { transform: translate(40px,-30px) scale(1.15); } }
   @keyframes hero-sparkle { 0% { opacity: 0; transform: translateY(0) scale(0.6); } 15% { opacity: 0.9; } 85% { opacity: 0.7; } 100% { opacity: 0; transform: translateY(-85vh) scale(1.1); } }
   @keyframes hero-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .hero-intro { animation: intro-out 0.8s cubic-bezier(0.76,0,0.24,1) 1.3s forwards; }
+  .hero-intro-name { opacity: 0; letter-spacing: 0.4em; animation: intro-name 1s cubic-bezier(0.22,1,0.36,1) 0.1s forwards; }
+  .hero-intro-line { transform: scaleX(0); animation: hero-line 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
+  .hero-intro-tag { opacity: 0; animation: hero-rise 0.6s ease 0.7s forwards; }
+  .hero-kenburns { animation-delay: var(--intro), calc(var(--intro) + 1.6s) !important; }
+  .hero-line { animation-delay: calc(0.4s + var(--intro)); }
+  @keyframes intro-out { to { transform: translateY(-100%); visibility: hidden; } }
+  @keyframes intro-name { to { opacity: 1; letter-spacing: 0.05em; } }
   @keyframes hero-drift { from { transform: scale(1) translate(0,0); } to { transform: scale(1.08) translate(-2%,-1%); } }
   @keyframes hero-shine { 0%,60% { background-position: 100% 0; } 100% { background-position: -50% 0; } }
   @keyframes hero-twinkle { 0%,100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.2) rotate(15deg); } }
@@ -238,7 +248,7 @@
       transition: none;
     }
     .hero-in > *, #top img, .hero-shimmer, .hero-twinkle, .hero-pulse, .hero-orb, .hero-line { animation: none; opacity: 1; }
-    .hero-sparkle { display: none; }
+    .hero-sparkle, .hero-intro { display: none; }
     [data-reveal]:hover img, [data-reveal]:hover { transform: none; }
   }
 }
