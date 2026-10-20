@@ -7,7 +7,7 @@ export function useRevealRoot<T extends HTMLElement>() {
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
-    const els = root.querySelectorAll<HTMLElement>("[data-reveal]");
+    const observed = new WeakSet<Element>();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -19,7 +19,10 @@ export function useRevealRoot<T extends HTMLElement>() {
       },
       { threshold: 0.12 },
     );
-    els.forEach((el) => {
+
+    const watch = (el: HTMLElement) => {
+      if (observed.has(el)) return;
+      observed.add(el);
       // Stagger siblings (cards in a grid) so they cascade in one after another.
       const siblings = el.parentElement
         ? Array.from(el.parentElement.children).filter((c) => c.hasAttribute("data-reveal"))
@@ -34,8 +37,27 @@ export function useRevealRoot<T extends HTMLElement>() {
         { once: true },
       );
       observer.observe(el);
+    };
+
+    const watchTree = (node: HTMLElement) => {
+      if (node.matches("[data-reveal]")) watch(node);
+      node.querySelectorAll<HTMLElement>("[data-reveal]").forEach(watch);
+    };
+
+    watchTree(root);
+    const mutations = new MutationObserver((records) => {
+      records.forEach((record) => {
+        record.addedNodes.forEach((node) => {
+          if (node instanceof HTMLElement) watchTree(node);
+        });
+      });
     });
-    return () => observer.disconnect();
+    mutations.observe(root, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mutations.disconnect();
+    };
   }, []);
 
   return ref;

@@ -13,8 +13,8 @@ export function TrustStrip() {
     <section className="border-y bg-secondary/60">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-8 sm:px-6 lg:grid-cols-4">
         {items.map(({ icon: Icon, title, sub }) => (
-          <div key={title} data-reveal className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-card text-primary shadow-sm">
+          <div key={title} data-reveal="soft" className="flex items-start gap-3">
+            <div className="reveal-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-card text-primary shadow-sm">
               <Icon className="h-5 w-5" />
             </div>
             <div>

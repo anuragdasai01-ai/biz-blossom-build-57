@@ -37,7 +37,7 @@ export function Services() {
           {serviceCategories.map((cat) => (
             <article
               key={cat.category}
-              data-reveal
+              data-reveal="tilt"
               className="group overflow-hidden rounded-3xl border bg-card shadow-sm transition-shadow duration-500 hover:shadow-lg"
             >
               <div className="overflow-hidden">

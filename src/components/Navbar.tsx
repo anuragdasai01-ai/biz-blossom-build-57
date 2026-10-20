@@ -116,7 +116,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
+      className={`nav-enter fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
         scrolled ? "bg-background/90 shadow-sm backdrop-blur-md" : "bg-transparent"
       }`}
     >
@@ -157,7 +157,7 @@ export function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className="border-t bg-background/95 px-4 pb-6 pt-3 backdrop-blur-md lg:hidden">
+        <div className="mobile-menu-enter border-t bg-background/95 px-4 pb-6 pt-3 backdrop-blur-md lg:hidden">
           {navItems.map((item) => (
             <a
               key={item.href}
