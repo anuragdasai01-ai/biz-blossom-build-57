@@ -263,7 +263,7 @@
     }
     .hero-in > *, #top img, .hero-shimmer, .hero-twinkle, .hero-pulse, .hero-orb, .hero-line,
     .nav-enter, .mobile-bar-enter, .mobile-menu-enter, .is-revealed .reveal-icon { animation: none; opacity: 1; }
-    .hero-sparkle, .hero-intro { display: none; }
+    .hero-sparkle, .hero-intro { display: none !important; }
     [data-reveal]:hover img, [data-reveal]:hover { transform: none; }
   }
 }
