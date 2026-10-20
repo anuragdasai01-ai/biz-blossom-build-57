@@ -19,7 +19,7 @@ export function VisitUs() {
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
           <div data-reveal="left" className="space-y-6">
-            <div className="rounded-2xl border bg-card p-6 shadow-sm">
+            <div data-reveal="soft" className="rounded-2xl border bg-card p-6 shadow-sm">
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                 <div>
@@ -35,7 +35,7 @@ export function VisitUs() {
               </div>
             </div>
 
-            <div className="rounded-2xl border bg-card p-6 shadow-sm">
+            <div data-reveal="left" className="rounded-2xl border bg-card p-6 shadow-sm">
               <div className="flex items-start gap-3">
                 <Clock className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                 <div className="w-full">
@@ -52,7 +52,7 @@ export function VisitUs() {
               </div>
             </div>
 
-            <div className="rounded-2xl border bg-card p-6 shadow-sm">
+            <div data-reveal="soft" className="rounded-2xl border bg-card p-6 shadow-sm">
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 shrink-0 text-primary" />
                 <div>

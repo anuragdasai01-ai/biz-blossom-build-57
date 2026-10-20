@@ -47,12 +47,13 @@ export function InstagramSection() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`View on Instagram: ${item.alt}`}
+                data-reveal="clip"
                 className={cls}
               >
                 {inner}
               </a>
             ) : (
-              <div key={item.alt} className={cls}>
+              <div key={item.alt} data-reveal="clip" className={cls}>
                 {inner}
               </div>
             );

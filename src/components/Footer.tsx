@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="border-t bg-foreground pb-24 text-background lg:pb-0">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+          <div data-reveal="left">
             <p className="font-display text-2xl font-semibold">{business.name}</p>
             <p className="mt-3 text-sm leading-relaxed text-background/70">
               A ladies' beauty parlour in Durga Colony, Rohtak — makeup, hair, skin care and
@@ -50,7 +50,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <div data-reveal="soft">
             <p className="text-sm font-semibold uppercase tracking-wider text-background/80">Contact</p>
             <ul className="mt-4 space-y-3 text-sm text-background/70">
               <li>
@@ -83,7 +83,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div data-reveal="soft">
             <p className="text-sm font-semibold uppercase tracking-wider text-background/80">Hours</p>
             <ul className="mt-4 space-y-3 text-sm text-background/70">
               <li className="flex items-center gap-2">
@@ -93,7 +93,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div data-reveal="right">
             <p className="text-sm font-semibold uppercase tracking-wider text-background/80">
               Ready when you are
             </p>

@@ -19,6 +19,7 @@ function TestimonialCard({
   return (
     <figure
       aria-hidden={ariaHidden}
+      data-reveal="soft"
       className="flex w-[280px] shrink-0 snap-center flex-col rounded-3xl border bg-card p-7 shadow-sm sm:w-[340px]"
     >
       <Quote className="h-6 w-6 text-primary/50" aria-hidden="true" />
