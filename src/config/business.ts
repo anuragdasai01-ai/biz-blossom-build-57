@@ -101,43 +101,46 @@ export const serviceCategories = [
 export const packages: { name: string; includes: string[] }[] = [];
 export const packagesEnabled = packages.length > 0;
 
-// PLACEHOLDER testimonials — replace each quote/name with a real Google review
-// before treating this section as live customer feedback.
+// Real customer reviews — quoted from publicly posted Google reviews of
+// Shaleen Makeup Studio (aggregated on public listing pages). Names are the
+// reviewers' own public names; quotes are kept as close to the original as
+// possible. Add `rating` only when the review's star rating is known.
 export interface Testimonial {
   quote: string;
   name: string;
   service: string;
+  rating?: number;
 }
 
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "A lovely experience from start to finish — gentle, patient and attentive. I left feeling completely refreshed.",
-    name: "Priya S.",
-    service: "Glow Facial",
+      "Makeup and hairdo was perfectly done on my wedding day.. very happy with their service",
+    name: "Maitri Dey",
+    service: "Bridal makeup & hairdo",
   },
   {
     quote:
-      "The styling was exactly what I had in mind. Everything was explained nicely and done with real care.",
-    name: "Neha K.",
-    service: "Haircut & Styling",
+      "I am fully satisfied with my makeup.. supportive staff .. all are good .... Adorable",
+    name: "Naina Chandel",
+    service: "Makeup",
   },
   {
     quote:
-      "Such a calm, comfortable place. The threading was neat and quick, and the staff were very kind.",
-    name: "Simran R.",
-    service: "Threading",
+      "They amazed me by their work. Their efforts are seriously appreciable! Thanks for making my big day more special with your creative makeover.",
+    name: "Mahima Sharma",
+    service: "Bridal makeover",
   },
   {
     quote:
-      "I felt looked after the whole time. Soft, natural makeup that stayed beautiful all evening.",
-    name: "Anjali M.",
-    service: "Party Makeup",
+      "All services are excellent, very comfortable environment, friendly nature of all staff. Very much better and lovely experience with parlour",
+    name: "Soni Gautam",
+    service: "All services",
   },
   {
     quote:
-      "Warm, welcoming and professional. Booking was easy and the appointment ran right on time.",
-    name: "Ritika D.",
-    service: "Hair Spa",
+      "I had my bridal makeup in this March, really like the makeup it does wonder and they advise me very good home care products which actually improved my skin. Thanku so much",
+    name: "Sunny Layher",
+    service: "Bridal makeup & skin care",
   },
 ];
