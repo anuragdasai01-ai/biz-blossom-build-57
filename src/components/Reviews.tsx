@@ -9,11 +9,13 @@ function TestimonialCard({
   quote,
   name,
   service,
+  rating,
   ariaHidden = false,
 }: {
   quote: string;
   name: string;
   service: string;
+  rating?: number;
   ariaHidden?: boolean;
 }) {
   return (
@@ -26,14 +28,27 @@ function TestimonialCard({
       <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-foreground/90">
         {quote}
       </blockquote>
-      <div
-        className="mt-5 flex items-center gap-1"
-        aria-label={`Rated 5 out of 5`}
-      >
-        {[1, 2, 3, 4, 5].map((i) => (
-          <Star key={i} className="h-3.5 w-3.5 fill-primary text-primary" />
-        ))}
-      </div>
+      {typeof rating === "number" ? (
+        <div
+          className="mt-5 flex items-center gap-1"
+          aria-label={`Rated ${rating} out of 5`}
+        >
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Star
+              key={i}
+              className={`h-3.5 w-3.5 ${
+                i <= Math.round(rating)
+                  ? "fill-primary text-primary"
+                  : "text-border"
+              }`}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="mt-5 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          Google review
+        </p>
+      )}
       <figcaption className="mt-3 flex items-baseline gap-2">
         <span className="font-display text-lg font-semibold text-foreground">
           {name}
