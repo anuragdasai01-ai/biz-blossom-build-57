@@ -15,7 +15,7 @@ function TestimonialCard({
   quote: string;
   name: string;
   service: string;
-  rating?: number;
+  rating?: number | undefined;
   ariaHidden?: boolean;
 }) {
   return (
