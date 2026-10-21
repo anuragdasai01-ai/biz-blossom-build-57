@@ -181,6 +181,7 @@ export function Reviews() {
                   quote={t.quote}
                   name={t.name}
                   service={t.service}
+                  rating={t.rating}
                   ariaHidden={i >= testimonials.length}
                 />
               ))}
