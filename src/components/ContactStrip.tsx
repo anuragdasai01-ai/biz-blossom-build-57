@@ -9,8 +9,9 @@ export function ContactStrip() {
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
       <div
         data-reveal
-        className="rounded-3xl bg-primary px-6 py-14 text-center shadow-lg sm:px-14"
+        className="relative overflow-hidden rounded-3xl bg-primary px-6 py-14 text-center shadow-lg sm:px-14"
       >
+        <span aria-hidden="true" className="cta-glow left-[-8rem] top-[-6rem]" />
         <h2 className="font-display text-4xl font-semibold text-primary-foreground sm:text-5xl">
           Let's Get You Ready
         </h2>
@@ -20,7 +21,7 @@ export function ContactStrip() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <button
             onClick={() => openBooking()}
-            className="inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-medium text-foreground shadow-sm transition-transform hover:-translate-y-0.5"
+            className="btn-shine inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-medium text-foreground shadow-sm transition-transform hover:-translate-y-0.5"
           >
             <CalendarCheck className="h-4 w-4" /> Book Appointment
           </button>

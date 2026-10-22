@@ -20,14 +20,14 @@ export function About() {
               className="aspect-[4/5] w-full object-cover"
             />
           </div>
-          <div className="absolute -bottom-5 -right-3 rounded-2xl bg-card px-5 py-4 shadow-lg sm:-right-6">
+          <div className="float-slow absolute -bottom-5 -right-3 rounded-2xl bg-card px-5 py-4 shadow-lg sm:-right-6">
             <p className="font-display text-3xl font-semibold text-primary">{business.rating.value}★</p>
             <p className="text-xs text-muted-foreground">{business.rating.count} Google reviews</p>
           </div>
         </div>
 
         <div data-reveal="right">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">About Us</p>
+          <p className="eyebrow text-xs font-semibold uppercase tracking-[0.3em] text-primary">About Us</p>
           <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
             Care, skill and a personal touch
           </h2>
@@ -47,7 +47,7 @@ export function About() {
           </div>
           <button
             onClick={() => openBooking()}
-            className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm transition-opacity hover:opacity-90"
+            className="btn-shine mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm transition-opacity hover:opacity-90"
           >
             <CalendarCheck className="h-4 w-4" /> Book Your Visit
           </button>

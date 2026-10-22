@@ -69,7 +69,7 @@ export function Hero() {
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <button
             onClick={() => openBooking()}
-            className="hero-pulse inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-md transition-all hover:opacity-90"
+            className="hero-pulse btn-shine inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-md transition-all hover:opacity-90"
           >
             <CalendarCheck className="h-4 w-4" /> Book Appointment
           </button>

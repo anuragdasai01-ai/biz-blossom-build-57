@@ -27,7 +27,7 @@ export function Gallery() {
   return (
     <section id="portfolio" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
       <div data-reveal className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Our Work</p>
+        <p className="eyebrow eyebrow-center text-xs font-semibold uppercase tracking-[0.3em] text-primary">Our Work</p>
         <h2 className="mt-3 font-display text-4xl font-semibold text-foreground sm:text-5xl">
           Beauty Portfolio
         </h2>
@@ -67,7 +67,7 @@ export function Gallery() {
               loading="lazy"
               className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/70 to-transparent px-4 pb-3 pt-10 text-sm font-medium text-background">
+            <figcaption className="absolute inset-x-0 bottom-0 translate-y-1.5 bg-gradient-to-t from-foreground/70 to-transparent px-4 pb-3 pt-10 text-sm font-medium text-background opacity-90 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
               {item.alt}
             </figcaption>
           </figure>

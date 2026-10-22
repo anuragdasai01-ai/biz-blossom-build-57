@@ -253,6 +253,51 @@
     to { transform: scale(1); }
   }
 
+  /* Scroll progress bar along the top edge */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 80;
+    transform: scaleX(0); transform-origin: left; pointer-events: none;
+    background: linear-gradient(90deg, var(--primary), color-mix(in oklab, var(--primary) 50%, var(--secondary)));
+  }
+
+  /* Shine sweep across primary buttons on hover */
+  .btn-shine { position: relative; overflow: hidden; }
+  .btn-shine::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: -80%; width: 55%;
+    background: linear-gradient(105deg, transparent, color-mix(in oklab, white 60%, transparent), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-shine:hover::after { left: 135%; }
+
+  /* Section eyebrow labels draw a thin rose line when they appear */
+  .eyebrow { position: relative; }
+  .eyebrow::after {
+    content: ""; position: absolute; bottom: -0.45rem; height: 1px; width: 3.5rem;
+    background: color-mix(in oklab, var(--primary) 55%, transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.35s;
+  }
+  .eyebrow-center::after { left: 0; right: 0; margin-inline: auto; transform-origin: center; }
+  .is-revealed .eyebrow::after { transform: scaleX(1); }
+
+  /* Gentle idle float for accents and badges */
+  .float-slow { animation: float-slow 6s ease-in-out infinite alternate; }
+  .cta-glow {
+    position: absolute; width: 26rem; height: 26rem; border-radius: 9999px;
+    filter: blur(70px); opacity: 0.35; pointer-events: none;
+    background: radial-gradient(circle, color-mix(in oklab, white 40%, transparent), transparent 70%);
+    animation: float-slow 14s ease-in-out infinite alternate;
+  }
+  @keyframes float-slow {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] {
       opacity: 1;
@@ -263,7 +308,9 @@
     }
     .hero-in > *, #top img, .hero-shimmer, .hero-twinkle, .hero-pulse, .hero-orb, .hero-line,
     .nav-enter, .mobile-bar-enter, .mobile-menu-enter, .is-revealed .reveal-icon { animation: none; opacity: 1; }
-    .hero-sparkle, .hero-intro { display: none !important; }
+    .hero-sparkle, .hero-intro, .scroll-progress, .cta-glow { display: none !important; }
+    .btn-shine::after, .eyebrow::after { display: none; }
+    .float-slow { animation: none; }
     [data-reveal]:hover img, [data-reveal]:hover { transform: none; }
   }
 }

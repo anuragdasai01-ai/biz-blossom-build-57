@@ -77,6 +77,35 @@ export function Reviews() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  // Count the rating and review total up once the rating card scrolls into view.
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [shownRating, setShownRating] = useState(business.rating.value);
+  const [shownCount, setShownCount] = useState(business.rating.count);
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        const duration = 1400;
+        const start = performance.now();
+        const tick = (t: number) => {
+          const p = Math.min(1, (t - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setShownRating(Math.round(business.rating.value * eased * 10) / 10);
+          setShownCount(Math.round(business.rating.count * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   // When the user interacts, stop the drift and align the row to the nearest
   // card so manual browsing starts from a clean position.
   const pause = useCallback(() => {
@@ -134,8 +163,8 @@ export function Reviews() {
   return (
     <section id="reviews" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div data-reveal="zoom" className="mx-auto max-w-3xl rounded-3xl border bg-card p-8 text-center shadow-sm sm:p-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+        <div ref={cardRef} data-reveal="zoom" className="mx-auto max-w-3xl rounded-3xl border bg-card p-8 text-center shadow-sm sm:p-14">
+          <p className="eyebrow eyebrow-center text-xs font-semibold uppercase tracking-[0.3em] text-primary">
             What Clients Say
           </p>
           <div className="mt-6 flex items-center justify-center gap-1.5" aria-label={`Rated ${business.rating.value} out of 5`}>
@@ -151,10 +180,10 @@ export function Reviews() {
             ))}
           </div>
           <p className="mt-4 font-display text-5xl font-semibold text-foreground">
-            {business.rating.value}
+            {shownRating}
           </p>
           <p className="mt-4 font-display text-2xl font-bold text-foreground sm:text-3xl">
-            Based on <span className="text-primary">{business.rating.count}</span> reviews on Google
+            Based on <span className="text-primary">{shownCount}</span> reviews on Google
           </p>
           <a
             href={business.mapsUrl}

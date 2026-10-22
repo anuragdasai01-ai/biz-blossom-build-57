@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { business } from "@/config/business";
 import { BookingProvider } from "@/lib/booking";
 import { useRevealRoot } from "@/lib/reveal";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { TrustStrip } from "@/components/TrustStrip";
@@ -67,6 +68,7 @@ function Index() {
   return (
     <BookingProvider>
       <div ref={ref} className="min-h-screen bg-background text-foreground">
+        <ScrollProgress />
         <Navbar />
         <main>
           <Hero />
