@@ -9,7 +9,7 @@ export function InstagramSection() {
     <section className="bg-secondary/50 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div data-reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+          <p className="eyebrow eyebrow-center text-xs font-semibold uppercase tracking-[0.3em] text-primary">
             Stay Connected
           </p>
           <h2 className="mt-3 font-display text-4xl font-semibold text-foreground sm:text-5xl">
