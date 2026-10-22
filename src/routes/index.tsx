@@ -18,6 +18,7 @@ import { MobileActionBar } from "@/components/MobileActionBar";
 import { BookingDialog } from "@/components/BookingDialog";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: business.seo.title },
