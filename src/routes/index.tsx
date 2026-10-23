@@ -26,8 +26,14 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: business.seo.title },
       { property: "og:description", content: business.seo.description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://biz-blossom-build-57.lovable.app/" },
+      { property: "og:image", content: "https://biz-blossom-build-57.lovable.app/og.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: business.seo.title },
+      { name: "twitter:description", content: business.seo.description },
+      { name: "twitter:image", content: "https://biz-blossom-build-57.lovable.app/og.jpg" },
     ],
+    links: [{ rel: "canonical", href: "https://biz-blossom-build-57.lovable.app/" }],
     scripts: [
       {
         type: "application/ld+json",
