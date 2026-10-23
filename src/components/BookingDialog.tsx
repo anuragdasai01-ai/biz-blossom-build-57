@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { X, ArrowLeft, CheckCircle2, MessageCircle } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { X, ArrowLeft, CheckCircle2, MessageCircle, Loader2 } from "lucide-react";
 import { business, links, serviceCategories } from "@/config/business";
+import { submitBookingRequest } from "@/lib/booking.functions";
 import { useBooking } from "@/lib/booking";
 
 const timeSlots = ["Morning (10 AM – 12 PM)", "Afternoon (12 PM – 4 PM)", "Evening (4 PM – 8 PM)"];
 
 export function BookingDialog() {
   const { open, preselectedService, closeBooking } = useBooking();
+  const submitFn = useServerFn(submitBookingRequest);
   const [step, setStep] = useState(1);
   const [service, setService] = useState("");
   const [date, setDate] = useState("");
@@ -15,6 +18,7 @@ export function BookingDialog() {
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -28,6 +32,7 @@ export function BookingDialog() {
       setName("");
       setPhone("");
       setNotes("");
+      setSubmitting(false);
     }
   }, [open, preselectedService]);
 
@@ -45,7 +50,7 @@ export function BookingDialog() {
 
   if (!open) return null;
 
-  const next = () => {
+  const next = async () => {
     setError("");
     if (step === 1 && !service) return setError("Please choose a service.");
     if (step === 2 && !date) return setError("Please pick a preferred date.");
@@ -54,7 +59,32 @@ export function BookingDialog() {
       if (name.trim().length < 2) return setError("Please enter your name.");
       if (!/^[0-9+\s-]{10,15}$/.test(phone.trim()))
         return setError("Please enter a valid phone number.");
-      return setDone(true);
+      if (submitting) return;
+      setSubmitting(true);
+      try {
+        const res = await submitFn({
+          data: {
+            service,
+            date,
+            timeSlot: time,
+            name: name.trim(),
+            phone: phone.trim(),
+            notes: notes.trim() ? notes.trim() : undefined,
+          },
+        });
+        if (!res.ok) {
+          setError(res.error ?? "Your request could not be sent. Please try again, or call us.");
+          return;
+        }
+        setDone(true);
+      } catch {
+        setError(
+          `Something went wrong. Please try again, or call us on ${business.phoneDisplay}.`,
+        );
+      } finally {
+        setSubmitting(false);
+      }
+      return;
     }
     setStep((s) => s + 1);
   };
