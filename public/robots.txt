@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://biz-blossom-build-57.lovable.app/sitemap.xml
+
