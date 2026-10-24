@@ -125,8 +125,8 @@ export function BookingDialog() {
               Appointment Request Received
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Thank you, {name.split(" ")[0]}! We've received your request. We'll contact you
-              shortly to confirm your appointment.
+              Thank you, {name.split(" ")[0]}! Your request has been sent to the studio. We'll
+              contact you shortly to confirm your appointment.
             </p>
             <dl className="mx-auto mt-5 max-w-xs space-y-2 rounded-2xl bg-accent px-5 py-4 text-left text-sm">
               <div className="flex justify-between gap-3">
@@ -327,9 +327,21 @@ export function BookingDialog() {
                 )}
                 <button
                   onClick={next}
-                  className="flex-1 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                  disabled={submitting}
+                  className="flex-1 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {step === 4 ? "Request Appointment" : "Continue"}
+                  {step === 4 ? (
+                    submitting ? (
+                      <>
+                        <Loader2 className="mr-2 inline h-4 w-4 animate-spin" />
+                        Sending…
+                      </>
+                    ) : (
+                      "Request Appointment"
+                    )
+                  ) : (
+                    "Continue"
+                  )}
                 </button>
               </div>
             </div>
