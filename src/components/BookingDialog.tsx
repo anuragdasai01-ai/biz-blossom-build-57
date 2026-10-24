@@ -57,8 +57,8 @@ export function BookingDialog() {
     if (step === 3 && !time) return setError("Please choose a time of day.");
     if (step === 4) {
       if (name.trim().length < 2) return setError("Please enter your name.");
-      if (!/^[0-9+\s-]{10,15}$/.test(phone.trim()))
-        return setError("Please enter a valid phone number.");
+      if (!/^(\+91[\s-]?)?[6-9]\d{9}$/.test(phone.trim().replace(/[\s-]/g, "")))
+        return setError("Please enter a valid 10-digit Indian mobile number.");
       if (submitting) return;
       setSubmitting(true);
       try {

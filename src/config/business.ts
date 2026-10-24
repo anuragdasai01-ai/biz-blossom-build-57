@@ -45,20 +45,18 @@ export const links = {
     phone: string;
     notes?: string | undefined;
   }) =>
+    // WhatsApp message format requested by the owner.
     `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
       [
-        `Hi, I'd like to book an appointment at ${business.name}.`,
+        `*New Inquiry Received*`,
         ``,
-        `Service: ${details.service}`,
-        `Preferred date: ${details.date}`,
-        `Preferred time: ${details.time}`,
-        `Name: ${details.name}`,
-        `Phone: ${details.phone}`,
-        details.notes ? `Notes: ${details.notes}` : ``,
-        ``,
-        `Please confirm my appointment. Thank you!`,
+        `*Name:* ${details.name}`,
+        `*Phone:* ${details.phone}`,
+        `*Service:* ${details.service}`,
+        `*Date & Time:* ${details.date}${details.time ? `, ${details.time}` : ""}`,
+        details.notes ? `*Notes:* ${details.notes}` : ``,
       ]
-        .filter((l) => l !== undefined)
+        .filter(Boolean)
         .join("\n"),
     )}`,
   directions: business.mapsUrl,
