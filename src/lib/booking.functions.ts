@@ -1,11 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const bookingSchema = z.object({
-  service: z.string().trim().min(1).max(120),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date"),
-  timeSlot: z.string().trim().min(1).max(60),
-  name: z.string().trim().min(2).max(100),
 // Indian mobile numbers: optional +91 prefix, starts 6-9, exactly 10 digits.
 const normalizePhone = (raw: string) => raw.trim().replace(/[\s-]/g, "");
 
