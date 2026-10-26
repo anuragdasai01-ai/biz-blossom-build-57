@@ -65,7 +65,9 @@ export const submitBookingRequest = createServerFn({ method: "POST" })
     if (appsScriptUrl) {
       try {
         const [y, m, d] = data.date.split("-").map(Number);
-        const prettyDate = new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(
+        const prettyDate = new Date(
+          Date.UTC(y ?? 2000, (m ?? 1) - 1, d ?? 1),
+        ).toLocaleDateString(
           "en-IN",
           { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" },
         );
