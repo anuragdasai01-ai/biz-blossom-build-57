@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { CalendarCheck } from "lucide-react";
 import { useBooking } from "@/lib/booking";
-import hairImg from "@/assets/gallery-hair.jpg";
-import makeupImg from "@/assets/gallery-makeup.jpg";
-import bridalImg from "@/assets/gallery-bridal.jpg";
-import nailsImg from "@/assets/gallery-nails.jpg";
-import facialImg from "@/assets/gallery-facial.jpg";
-import threadingImg from "@/assets/gallery-threading.jpg";
+import hairImg from "@/assets/gallery-hair.webp";
+import makeupImg from "@/assets/gallery-makeup.webp";
+import bridalImg from "@/assets/gallery-bridal.webp";
+import nailsImg from "@/assets/gallery-nails.webp";
+import facialImg from "@/assets/gallery-facial.webp";
+import threadingImg from "@/assets/gallery-threading.webp";
 
 export const portfolioItems = [
   { src: hairImg, alt: "Elegant curled hairstyle", category: "Hair" },

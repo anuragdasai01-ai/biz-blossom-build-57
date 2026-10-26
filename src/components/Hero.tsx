@@ -1,7 +1,7 @@
 import { CalendarCheck, MapPin, MessageCircle, Phone, Instagram, Facebook, Star } from "lucide-react";
 import { business, links } from "@/config/business";
 import { useBooking } from "@/lib/booking";
-import heroImg from "@/assets/hero.jpg";
+import heroImg from "@/assets/hero.webp";
 
 const quickActions = [
   { label: "Call us", href: links.call, icon: Phone },

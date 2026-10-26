@@ -1,7 +1,7 @@
 import { MapPin, CalendarCheck } from "lucide-react";
 import { business } from "@/config/business";
 import { useBooking } from "@/lib/booking";
-import aboutImg from "@/assets/about.jpg";
+import aboutImg from "@/assets/about.webp";
 
 export function About() {
   const { openBooking } = useBooking();
