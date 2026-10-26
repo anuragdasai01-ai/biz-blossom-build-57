@@ -29,6 +29,8 @@ export function Hero() {
           alt={`Inside ${business.fullName}`}
           width={1920}
           height={1280}
+          fetchPriority="high"
+          decoding="async"
           className="hero-kenburns h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30" />
