@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { X, ArrowLeft, CheckCircle2, MessageCircle, Loader2 } from "lucide-react";
+import { X, ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
 import { business, links, serviceCategories } from "@/config/business";
 import { submitBookingRequest } from "@/lib/booking.functions";
 import { useBooking } from "@/lib/booking";
