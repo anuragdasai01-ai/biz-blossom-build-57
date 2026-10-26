@@ -61,8 +61,8 @@ export const submitBookingRequest = createServerFn({ method: "POST" })
     // Forward a copy to the owner's Google Sheet via their Apps Script Web App.
     // The booking row above is the source of truth — a forwarding failure is
     // logged but never fails the visitor's request.
-    const appsScriptUrl = process.env["APPS_SCRIPT_WEBAPP_URL"];
-    if (appsScriptUrl) {
+    const appsScriptUrl = process.env["APPS_SCRIPT_WEBAPP_URL"] ?? "";
+    if (/^https:\/\/script\.google\.com\//.test(appsScriptUrl)) {
       try {
         const [y, m, d] = data.date.split("-").map(Number);
         const prettyDate = new Date(
