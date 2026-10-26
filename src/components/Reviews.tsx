@@ -122,23 +122,46 @@ export function Reviews() {
   }, []);
 
   // Continuous drift: rAF advances scroll position, wrapping seamlessly across
-  // the duplicated card list. Paused while the user is interacting.
+  // the duplicated card list. Paused while the user is interacting. The loop
+  // idles completely when the carousel is off-screen or the tab is hidden, so
+  // it never burns frames while the visitor is elsewhere on the page.
+  const inView = useRef(true);
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        inView.current = entries.some((e) => e.isIntersecting);
+        if (inView.current) acc.current = track.scrollLeft;
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(track);
+    return () => io.disconnect();
+  }, []);
+
+  const acc = useRef(0);
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    acc.current = track.scrollLeft;
 
     let raf = 0;
-    let acc = track.scrollLeft;
     const step = () => {
-      if (!paused && !reducedMotion.current) {
+      if (
+        inView.current &&
+        document.visibilityState === "visible" &&
+        !paused &&
+        !reducedMotion.current
+      ) {
         const half = track.scrollWidth / 2;
         if (half > 0) {
-          acc += DRIFT_SPEED;
-          if (acc >= half) acc -= half;
-          track.scrollLeft = acc;
+          acc.current += DRIFT_SPEED;
+          if (acc.current >= half) acc.current -= half;
+          track.scrollLeft = acc.current;
         }
       } else {
-        acc = track.scrollLeft;
+        acc.current = track.scrollLeft;
       }
       raf = requestAnimationFrame(step);
     };

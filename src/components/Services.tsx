@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { serviceCategories } from "@/config/business";
 import { useBooking } from "@/lib/booking";
-import threadingImg from "@/assets/gallery-threading.jpg";
-import facialImg from "@/assets/gallery-facial.jpg";
-import hairImg from "@/assets/gallery-hair.jpg";
-import makeupImg from "@/assets/gallery-makeup.jpg";
-import bridalImg from "@/assets/gallery-bridal.jpg";
-import nailsImg from "@/assets/gallery-nails.jpg";
+import threadingImg from "@/assets/gallery-threading.webp";
+import facialImg from "@/assets/gallery-facial.webp";
+import hairImg from "@/assets/gallery-hair.webp";
+import makeupImg from "@/assets/gallery-makeup.webp";
+import bridalImg from "@/assets/gallery-bridal.webp";
+import nailsImg from "@/assets/gallery-nails.webp";
 
 const categoryImages: Record<string, string> = {
   "Threading & Grooming": threadingImg,
