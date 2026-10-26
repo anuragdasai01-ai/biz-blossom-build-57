@@ -76,6 +76,14 @@ export function BookingDialog() {
           setError(res.error ?? "Your request could not be sent. Please try again, or call us.");
           return;
         }
+        // The request is stored and forwarded — send the visitor straight to
+        // WhatsApp with the pre-filled inquiry message. The success screen
+        // stays behind as a fallback (e.g. if they come back / popups blocked).
+        try {
+          window.location.href = links.whatsappBooking(bookingDetails);
+        } catch {
+          /* ignore — success screen is the fallback */
+        }
         setDone(true);
       } catch {
         setError(
@@ -334,7 +342,7 @@ export function BookingDialog() {
                     submitting ? (
                       <>
                         <Loader2 className="mr-2 inline h-4 w-4 animate-spin" />
-                        Sending…
+                        Sending details…
                       </>
                     ) : (
                       "Request Appointment"
