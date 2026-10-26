@@ -1,11 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const bookingSchema = z.object({
-  service: z.string().trim().min(1).max(120),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date"),
-  timeSlot: z.string().trim().min(1).max(60),
-  name: z.string().trim().min(2).max(100),
 // Indian mobile numbers: optional +91 prefix, starts 6-9, exactly 10 digits.
 const normalizePhone = (raw: string) => raw.trim().replace(/[\s-]/g, "");
 
@@ -66,11 +61,13 @@ export const submitBookingRequest = createServerFn({ method: "POST" })
     // Forward a copy to the owner's Google Sheet via their Apps Script Web App.
     // The booking row above is the source of truth — a forwarding failure is
     // logged but never fails the visitor's request.
-    const appsScriptUrl = process.env["APPS_SCRIPT_WEBAPP_URL"];
-    if (appsScriptUrl) {
+    const appsScriptUrl = process.env["APPS_SCRIPT_WEBAPP_URL"] ?? "";
+    if (/^https:\/\/script\.google\.com\//.test(appsScriptUrl)) {
       try {
         const [y, m, d] = data.date.split("-").map(Number);
-        const prettyDate = new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(
+        const prettyDate = new Date(
+          Date.UTC(y ?? 2000, (m ?? 1) - 1, d ?? 1),
+        ).toLocaleDateString(
           "en-IN",
           { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" },
         );
