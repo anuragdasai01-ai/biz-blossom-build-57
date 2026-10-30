@@ -2,6 +2,7 @@ import { CalendarCheck, MapPin, MessageCircle, Phone, Instagram, Facebook, Star 
 import { business, links } from "@/config/business";
 import { useBooking } from "@/lib/booking";
 import heroImg from "@/assets/hero.webp";
+import introPoster from "@/assets/og-poster.jpg";
 
 const quickActions = [
   { label: "Call us", href: links.call, icon: Phone },
@@ -14,14 +15,28 @@ export function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden">
-      <div aria-hidden="true" className="hero-intro fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background">
-        <span className="hero-intro-name px-6 text-center font-display text-4xl font-semibold tracking-wide text-foreground sm:text-5xl">
-          {business.name}
-        </span>
-        <span className="hero-intro-line mt-4 block h-px w-32 bg-primary" />
-        <span className="hero-intro-tag mt-4 text-[10px] font-semibold uppercase tracking-[0.4em] text-primary">
-          Rohtak
-        </span>
+      <div aria-hidden="true" className="hero-intro fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background px-5">
+        <div className="hero-intro-head flex flex-col items-center">
+          <span className="hero-intro-name px-6 text-center font-display text-4xl font-semibold tracking-wide text-foreground sm:text-5xl">
+            {business.name}
+          </span>
+          <span className="hero-intro-line mt-4 block h-px w-32 bg-primary" />
+          <span className="hero-intro-tag mt-4 text-[10px] font-semibold uppercase tracking-[0.4em] text-primary">
+            Rohtak
+          </span>
+        </div>
+        <figure className="hero-intro-poster">
+          <img
+            src={introPoster}
+            alt=""
+            width={1200}
+            height={630}
+            className="w-full rounded-2xl shadow-[0_30px_80px_-30px_color-mix(in_oklab,var(--primary)_45%,transparent)] ring-1 ring-primary/15"
+          />
+          <figcaption className="mt-5 text-center text-[10px] font-medium uppercase tracking-[0.3em] text-muted-foreground">
+            Durga Colony, Rohtak · Open Daily 10 AM – 8 PM
+          </figcaption>
+        </figure>
       </div>
       <div className="absolute inset-0">
         <img
