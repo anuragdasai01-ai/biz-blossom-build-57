@@ -15,7 +15,7 @@ export function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden">
-      <div aria-hidden="true" className="hero-intro fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background px-5">
+      <div aria-hidden="true" className="hero-intro fixed inset-0 z-[100] flex flex-col items-center justify-center gap-7 overflow-hidden bg-background px-5">
         <div className="hero-intro-head relative z-10 flex flex-col items-center">
           <span className="hero-intro-name px-4 text-center font-display text-4xl font-semibold tracking-wide text-foreground sm:text-6xl">
             {business.name}
