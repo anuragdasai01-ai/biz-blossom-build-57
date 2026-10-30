@@ -225,7 +225,7 @@
   @keyframes hero-sparkle { 0% { opacity: 0; transform: translateY(0) scale(0.6); } 15% { opacity: 0.9; } 85% { opacity: 0.7; } 100% { opacity: 0; transform: translateY(-85vh) scale(1.1); } }
   @keyframes hero-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   .hero-intro { animation: intro-out 0.8s cubic-bezier(0.76,0,0.24,1) 3.6s forwards; }
-  .hero-intro-head { animation: intro-head-out 0.5s ease 1.25s forwards; }
+  .hero-intro-head { position: absolute; animation: intro-head-out 0.5s ease 1.25s forwards; }
   .hero-intro-name { opacity: 0; letter-spacing: 0.4em; animation: intro-name 1s cubic-bezier(0.22,1,0.36,1) 0.1s forwards; }
   .hero-intro-line { transform: scaleX(0); animation: hero-line 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
   .hero-intro-tag { opacity: 0; animation: hero-rise 0.6s ease 0.7s forwards; }
