@@ -92,6 +92,12 @@ export function BookingDialog() {
   };
 
   const today = new Date().toISOString().split("T")[0];
+  // YYYY-MM-DD → dd/mm/yy (e.g. 05/11/26) — the format the studio reads best.
+  const formatDmy = (iso: string) => {
+    if (!iso) return "";
+    const [y, m, d] = iso.split("-").map(Number);
+    return `${String(d).padStart(2, "0")}/${String(m ?? 1).padStart(2, "0")}/${String(y ?? 0).slice(2)}`;
+  };
   const prettyDate = date
     ? new Date(`${date}T00:00:00`).toLocaleDateString("en-IN", {
         weekday: "short",
@@ -109,6 +115,36 @@ export function BookingDialog() {
     name: name.trim(),
     phone: phone.trim(),
     notes: notes.trim() || undefined,
+  };
+
+  // "Confirm faster on WhatsApp": fire-and-forget copy of the booking into the
+  // owner's Google Sheet (via Apps Script, which also emails the owner), then
+  // redirect to WhatsApp with zero delay — the keepalive request survives the
+  // navigation.
+  const handleWhatsAppConfirm = () => {
+    try {
+      fetch(
+        "https://script.google.com/macros/s/AKfycbyn53Fi0HlNwH1PRAw_3XGtSf_4YWWYa3_PdK22joW18sZYWJUhbPeEPQy46mMFhu9O/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify({
+            name: name.trim(),
+            phone: phone.trim(),
+            service,
+            date: formatDmy(date) || date,
+            time,
+          }),
+        },
+      ).catch(() => {
+        /* best-effort background copy — never block or fail the redirect */
+      });
+    } catch {
+      /* ignore — the redirect below must always happen */
+    }
+    window.location.href = links.whatsappBooking(bookingDetails);
   };
 
   return (
