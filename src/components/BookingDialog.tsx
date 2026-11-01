@@ -92,6 +92,12 @@ export function BookingDialog() {
   };
 
   const today = new Date().toISOString().split("T")[0];
+  // YYYY-MM-DD → dd/mm/yy (e.g. 05/11/26) — the format the studio reads best.
+  const formatDmy = (iso: string) => {
+    if (!iso) return "";
+    const [y, m, d] = iso.split("-").map(Number);
+    return `${String(d).padStart(2, "0")}/${String(m ?? 1).padStart(2, "0")}/${String(y ?? 0).slice(2)}`;
+  };
   const prettyDate = date
     ? new Date(`${date}T00:00:00`).toLocaleDateString("en-IN", {
         weekday: "short",
@@ -109,6 +115,36 @@ export function BookingDialog() {
     name: name.trim(),
     phone: phone.trim(),
     notes: notes.trim() || undefined,
+  };
+
+  // "Confirm faster on WhatsApp": fire-and-forget copy of the booking into the
+  // owner's Google Sheet (via Apps Script, which also emails the owner), then
+  // redirect to WhatsApp with zero delay — the keepalive request survives the
+  // navigation.
+  const handleWhatsAppConfirm = () => {
+    try {
+      fetch(
+        "https://script.google.com/macros/s/AKfycbyn53Fi0HlNwH1PRAw_3XGtSf_4YWWYa3_PdK22joW18sZYWJUhbPeEPQy46mMFhu9O/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify({
+            name: name.trim(),
+            phone: phone.trim(),
+            service,
+            date: formatDmy(date) || date,
+            time,
+          }),
+        },
+      ).catch(() => {
+        /* best-effort background copy — never block or fail the redirect */
+      });
+    } catch {
+      /* ignore — the redirect below must always happen */
+    }
+    window.location.href = links.whatsappBooking(bookingDetails);
   };
 
   return (
@@ -156,6 +192,10 @@ export function BookingDialog() {
               href={links.whatsappBooking(bookingDetails)}
               target="_blank"
               rel="noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                handleWhatsAppConfirm();
+              }}
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-transform hover:-translate-y-0.5"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4">
@@ -233,13 +273,32 @@ export function BookingDialog() {
               {step === 2 && (
                 <div>
                   <p className="mb-3 text-sm font-medium text-foreground">Preferred date</p>
-                  <input
-                    type="date"
-                    min={today}
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  />
+                  <div className="relative">
+                    {/* Visual box that always shows dd/mm/yy — the native date input
+                        hides its placeholder on mobile, so we render our own text. */}
+                    <div className="w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground">
+                      <span className={date ? "text-foreground" : "text-muted-foreground"}>
+                        {formatDmy(date) || "dd/mm/yy"}
+                      </span>
+                    </div>
+                    {/* Invisible native date input on top: tapping anywhere opens
+                        the calendar picker and the custom span shows the selection. */}
+                    <input
+                      type="date"
+                      min={today}
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      onClick={(e) => {
+                        try {
+                          e.currentTarget.showPicker?.();
+                        } catch {
+                          /* some browsers restrict showPicker — the tap still opens it */
+                        }
+                      }}
+                      aria-label="Preferred date"
+                      className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+                    />
+                  </div>
                   <p className="mt-2 text-xs text-muted-foreground">
                     Open {business.hours.days}, {business.hours.time}
                   </p>
