@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { X, ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
 import { business, links, serviceCategories } from "@/config/business";
@@ -117,34 +117,52 @@ export function BookingDialog() {
     notes: notes.trim() || undefined,
   };
 
-  // "Confirm faster on WhatsApp": fire-and-forget copy of the booking into the
-  // owner's Google Sheet (via Apps Script, which also emails the owner), then
-  // redirect to WhatsApp with zero delay — the keepalive request survives the
-  // navigation.
+  // "Confirm faster on WhatsApp": the tap opens WhatsApp on the very first
+  // line (no dead-time), then the booking is copied to the owner's Google
+  // Sheet in the background via sendBeacon (fetch fallback) — the beacon
+  // survives the tab switch. The button shows an instant pressed/loading
+  // state and resets itself after 3 seconds.
+  const openingWaRef = useRef<number | null>(null);
+  useEffect(
+    () => () => {
+      if (openingWaRef.current !== null) window.clearTimeout(openingWaRef.current);
+    },
+    [],
+  );
   const handleWhatsAppConfirm = () => {
+    // FIRST line — zero-delay redirect, synchronously inside the click gesture.
+    window.open(links.whatsappBooking(bookingDetails), "_blank", "noopener,noreferrer");
+    setOpeningWa(true);
+    if (openingWaRef.current !== null) window.clearTimeout(openingWaRef.current);
+    openingWaRef.current = window.setTimeout(() => setOpeningWa(false), 3000);
+    const payload = {
+      name: name.trim(),
+      phone: phone.trim(),
+      service,
+      date: formatDmy(date) || date,
+      time,
+    };
+    const scriptUrl =
+      "https://script.google.com/macros/s/AKfycbyn53Fi0HlNwH1PRAw_3XGtSf_4YWWYa3_PdK22joW18sZYWJUhbPeEPQy46mMFhu9O/exec";
     try {
-      fetch(
-        "https://script.google.com/macros/s/AKfycbyn53Fi0HlNwH1PRAw_3XGtSf_4YWWYa3_PdK22joW18sZYWJUhbPeEPQy46mMFhu9O/exec",
-        {
+      const beaconOk = navigator.sendBeacon?.(
+        scriptUrl,
+        new Blob([JSON.stringify(payload)], { type: "text/plain" }),
+      );
+      if (!beaconOk) {
+        fetch(scriptUrl, {
           method: "POST",
           mode: "no-cors",
           keepalive: true,
           headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify({
-            name: name.trim(),
-            phone: phone.trim(),
-            service,
-            date: formatDmy(date) || date,
-            time,
-          }),
-        },
-      ).catch(() => {
-        /* best-effort background copy — never block or fail the redirect */
-      });
+          body: JSON.stringify(payload),
+        }).catch(() => {
+          /* best-effort background copy — never block or fail anything */
+        });
+      }
     } catch {
-      /* ignore — the redirect below must always happen */
+      /* ignore — the redirect above has already happened */
     }
-    window.location.href = links.whatsappBooking(bookingDetails);
   };
 
   return (
