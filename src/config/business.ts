@@ -9,7 +9,7 @@ export const business = {
   // DEMO MODE: WhatsApp buttons currently open the developer's own WhatsApp
   // (+91 8798041014) so demo bookings never reach the studio's real number.
   // REVERT to "919253872499" before handing the site to the client.
-  whatsapp: "9198798041014",
+  whatsapp: "918798041014",
   address: {
     line1: "1073/20, Sonipat Stand Rd",
     line2: "Opposite Durga Girls Hostel, Durga Colony",
