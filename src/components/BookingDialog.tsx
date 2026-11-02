@@ -118,11 +118,6 @@ export function BookingDialog() {
     notes: notes.trim() || undefined,
   };
 
-  // "Confirm faster on WhatsApp": the tap opens WhatsApp on the very first
-  // line (no dead-time), then the booking is copied to the owner's Google
-  // Sheet in the background via sendBeacon (fetch fallback) — the beacon
-  // survives the tab switch. The button shows an instant pressed/loading
-  // state and resets itself after 3 seconds.
   const openingWaRef = useRef<number | null>(null);
   useEffect(
     () => () => {
