@@ -49,6 +49,15 @@ export function BookingDialog() {
     };
   }, [open, closeBooking]);
 
+  // Cleanup timer for the WhatsApp button's 3-second loading state.
+  const openingWaRef = useRef<number | null>(null);
+  useEffect(
+    () => () => {
+      if (openingWaRef.current !== null) window.clearTimeout(openingWaRef.current);
+    },
+    [],
+  );
+
   if (!open) return null;
 
   const next = async () => {
@@ -118,13 +127,6 @@ export function BookingDialog() {
     notes: notes.trim() || undefined,
   };
 
-  const openingWaRef = useRef<number | null>(null);
-  useEffect(
-    () => () => {
-      if (openingWaRef.current !== null) window.clearTimeout(openingWaRef.current);
-    },
-    [],
-  );
   const handleWhatsAppConfirm = () => {
     // FIRST line — zero-delay redirect, synchronously inside the click gesture.
     window.open(links.whatsappBooking(bookingDetails), "_blank", "noopener,noreferrer");
