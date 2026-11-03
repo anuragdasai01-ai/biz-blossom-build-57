@@ -63,9 +63,9 @@
 
 @property --intro { syntax: '<time>'; inherits: true; initial-value: 0s; }
 :root {
-  /* Opening sequence: name → poster → curtain. Total wait ~2.6s before the
-     hero — long enough to feel premium, short enough that nobody waits. */
-  --intro: 2.6s;
+  /* Opening sequence: name → poster → curtain. Total wait ~2.5s before the
+     hero — quick reveal, still feels premium. */
+  --intro: 1.7s;
   --radius: 0.75rem;
   --background: oklch(0.975 0.008 85); /* warm ivory */
   --foreground: oklch(0.28 0.025 45); /* deep brown-charcoal */
@@ -227,21 +227,21 @@
   @keyframes hero-sparkle { 0% { opacity: 0; transform: translateY(0) scale(0.6); } 15% { opacity: 0.9; } 85% { opacity: 0.7; } 100% { opacity: 0; transform: translateY(-85vh) scale(1.1); } }
   @keyframes hero-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   .hero-intro { animation: intro-out 0.8s cubic-bezier(0.76,0,0.24,1) 2.6s forwards; }
-  .hero-intro-name { opacity: 0; letter-spacing: 0.4em; animation: intro-name 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s forwards; }
-  .hero-intro-line { transform: scaleX(0); animation: hero-line 0.9s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; }
-  .hero-intro-tag { opacity: 0; animation: hero-rise 0.6s ease 0.6s forwards; }
+  .hero-intro-name { opacity: 0; letter-spacing: 0.4em; animation: intro-name 0.6s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
+  .hero-intro-line { transform: scaleX(0); animation: hero-line 0.6s cubic-bezier(0.22,1,0.36,1) 0.25s forwards; }
+  .hero-intro-tag { opacity: 0; animation: hero-rise 0.5s ease 0.4s forwards; }
   .hero-intro-poster {
     opacity: 0;
     transform: translateY(32px) scale(0.94);
     filter: blur(8px);
     width: min(96vw, 860px);
-    animation: poster-in 0.9s cubic-bezier(0.22,1,0.36,1) 0.7s forwards;
+    animation: poster-in 0.7s cubic-bezier(0.22,1,0.36,1) 0.45s forwards;
   }
   .hero-intro-poster img {
     overflow: hidden;
     animation:
-      poster-breathe 6s ease-in-out 1.6s infinite alternate,
-      poster-glow 2.6s ease-in-out 1.4s infinite alternate;
+      poster-breathe 6s ease-in-out 1s infinite alternate,
+      poster-glow 2.6s ease-in-out 0.9s infinite alternate;
   }
   @keyframes poster-in { to { opacity: 1; transform: none; filter: none; } }
   @keyframes poster-breathe { from { transform: scale(1); } to { transform: scale(1.04); } }
