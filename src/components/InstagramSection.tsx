@@ -102,11 +102,6 @@ export function InstagramSection() {
           <span className="inline-flex items-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-medium text-primary">
             <Instagram className="h-4 w-4" /> Follow @{handle}
           </span>
-          <p className="mt-3 text-xs text-muted-foreground">
-            {hasProfile
-              ? "Tag us in your look — we love reposting."
-              : "Our handle is launching soon — stay tuned."}
-          </p>
         </div>
       </div>
     </section>
