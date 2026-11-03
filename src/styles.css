@@ -63,7 +63,9 @@
 
 @property --intro { syntax: '<time>'; inherits: true; initial-value: 0s; }
 :root {
-  --intro: 3.6s;
+  /* Opening sequence: name → poster → curtain. Total wait ~2.6s before the
+     hero — long enough to feel premium, short enough that nobody waits. */
+  --intro: 2.6s;
   --radius: 0.75rem;
   --background: oklch(0.975 0.008 85); /* warm ivory */
   --foreground: oklch(0.28 0.025 45); /* deep brown-charcoal */
