@@ -55,13 +55,13 @@ function PostTile({ post }: { post: (typeof posts)[number] }) {
       target="_blank"
       rel="noreferrer"
       aria-label={`View on Instagram: ${post.alt}`}
-      data-reveal="clip"
+      data-reveal="zoom"
       className={cls}
     >
       {inner}
     </a>
   ) : (
-    <div key={post.alt} data-reveal="clip" className={cls}>
+    <div key={post.alt} data-reveal="zoom" className={cls}>
       {inner}
     </div>
   );
