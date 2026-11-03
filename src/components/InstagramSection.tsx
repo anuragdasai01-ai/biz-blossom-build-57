@@ -6,6 +6,7 @@ import hairImg from "@/assets/insta-hair.webp";
 import haircutImg from "@/assets/insta-haircut.webp";
 import facialImg from "@/assets/insta-facial.webp";
 import blowdryImg from "@/assets/insta-blowdry.webp";
+import nailsImg from "@/assets/insta-nails.webp";
 
 const handle = business.name.replace(/\s+/g, "").toLowerCase();
 
@@ -16,6 +17,7 @@ const posts = [
   { src: haircutImg, alt: "Hair cut in progress", caption: "Precision hair cut", tag: "Hair" },
   { src: facialImg, alt: "Relaxing facial treatment", caption: "Self-care ritual", tag: "Skin" },
   { src: blowdryImg, alt: "Blow-dry styling in progress", caption: "Blow-dry finish", tag: "Styling" },
+  { src: nailsImg, alt: "Manicure in progress", caption: "Nail care ritual", tag: "Nails" },
 ];
 
 function PostTile({ post }: { post: (typeof posts)[number] }) {
