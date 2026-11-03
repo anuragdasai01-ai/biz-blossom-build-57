@@ -1,21 +1,21 @@
 import { Heart, Instagram, MessageCircle } from "lucide-react";
 import { business } from "@/config/business";
 import bridalImg from "@/assets/insta-bridal.webp";
-import flatlayImg from "@/assets/insta-flatlay.webp";
-import studioImg from "@/assets/insta-studio.webp";
+import makeupImg from "@/assets/insta-makeup.webp";
 import hairImg from "@/assets/insta-hair.webp";
+import haircutImg from "@/assets/insta-haircut.webp";
 import facialImg from "@/assets/insta-facial.webp";
-import nailsImg from "@/assets/insta-nails.webp";
+import blowdryImg from "@/assets/insta-blowdry.webp";
 
 const handle = business.name.replace(/\s+/g, "").toLowerCase();
 
 const posts = [
   { src: bridalImg, alt: "Bridal makeup look", caption: "Bridal glow, done right", tag: "Bridal", featured: true },
-  { src: flatlayImg, alt: "Makeup brushes and products flatlay", caption: "Studio favourites", tag: "Products" },
+  { src: makeupImg, alt: "Makeup application in progress", caption: "Makeup in progress", tag: "Makeup" },
   { src: hairImg, alt: "Glossy curled hair styling", caption: "Curls & colour", tag: "Hair" },
-  { src: studioImg, alt: "Inside the studio vanity", caption: "Inside the studio", tag: "Studio" },
+  { src: haircutImg, alt: "Hair cut in progress", caption: "Precision hair cut", tag: "Hair" },
   { src: facialImg, alt: "Relaxing facial treatment", caption: "Self-care ritual", tag: "Skin" },
-  { src: nailsImg, alt: "Nude rose nail art with roses", caption: "Nail diaries", tag: "Nails" },
+  { src: blowdryImg, alt: "Blow-dry styling in progress", caption: "Blow-dry finish", tag: "Styling" },
 ];
 
 function PostTile({ post }: { post: (typeof posts)[number] }) {
