@@ -3,7 +3,7 @@ import { Star, ExternalLink, Quote } from "lucide-react";
 import { business, testimonials } from "@/config/business";
 
 const RESUME_DELAY_MS = 4000;
-const DRIFT_SPEED = 0.4; // px per frame
+const DRIFT_SPEED = 0.8; // px per frame
 
 function TestimonialCard({
   quote,
@@ -49,12 +49,20 @@ function TestimonialCard({
           Google review
         </p>
       )}
-      <figcaption className="mt-3 flex items-baseline gap-2">
-        <span className="font-display text-lg font-semibold text-foreground">
-          {name}
+      <figcaption className="mt-3 flex items-center gap-3">
+        <span
+          aria-hidden="true"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent font-display text-lg font-semibold text-accent-foreground"
+        >
+          {name.charAt(0).toUpperCase()}
         </span>
-        <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          {service}
+        <span className="flex flex-col">
+          <span className="font-display text-lg font-semibold text-foreground">
+            {name}
+          </span>
+          <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            {service}
+          </span>
         </span>
       </figcaption>
     </figure>
