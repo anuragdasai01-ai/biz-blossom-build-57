@@ -1,1 +1,1 @@
-- [ ] Instagram section: remove "Our handle is launching soon — stay tuned." line under Follow pill, adjust spacing (only this section)
+- [x] Instagram section: remove "Our handle is launching soon — stay tuned." line under Follow pill, adjust spacing (only this section)
