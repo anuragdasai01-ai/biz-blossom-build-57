@@ -27,7 +27,7 @@ export function About() {
         </div>
 
         <div data-reveal="right">
-          <p className="eyebrow text-xs font-semibold uppercase tracking-[0.3em] text-primary">About Us</p>
+          <p className="eyebrow eyebrow-inline text-xs font-semibold uppercase tracking-[0.3em] text-primary">About Us</p>
           <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
             Care, skill and a personal touch
           </h2>
