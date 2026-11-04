@@ -291,16 +291,16 @@
   }
   .btn-shine:hover::after { left: 135%; }
 
-  /* Section eyebrow labels draw a thin rose line when they appear (grows upward) */
-  .eyebrow { position: relative; }
+  /* Section eyebrow labels carry a thin rose line hugging the label itself (grows upward) */
+  .eyebrow { position: relative; display: inline-block; }
   .eyebrow::after {
-    content: ""; position: absolute; bottom: -0.45rem; height: 1px; width: 3.5rem;
+    content: ""; position: absolute; bottom: -0.35rem; left: 0; right: 0.3em; height: 1px;
     background: color-mix(in oklab, var(--primary) 55%, transparent);
     transform: scaleY(0); transform-origin: center bottom;
     opacity: 0;
     transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.35s, opacity 0.6s ease 0.45s;
   }
-  .eyebrow-center::after { left: 0; right: 0; margin-inline: auto; transform-origin: center bottom; }
+  .eyebrow-center::after { right: 0.3em; margin-inline: auto; transform-origin: center bottom; }
   .is-revealed .eyebrow::after { transform: scaleY(1); opacity: 1; }
 
   /* Gentle idle float for accents and badges */
