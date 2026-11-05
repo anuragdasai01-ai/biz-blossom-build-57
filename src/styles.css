@@ -240,8 +240,8 @@
   .hero-intro-poster img {
     overflow: hidden;
     animation:
-      poster-breathe 6s ease-in-out 1s infinite alternate,
-      poster-glow 2.6s ease-in-out 0.9s infinite alternate;
+      poster-breathe 6s ease-in-out 0.8s infinite alternate,
+      poster-glow 2.6s ease-in-out 0.7s infinite alternate;
   }
   @keyframes poster-in { to { opacity: 1; transform: none; filter: none; } }
   @keyframes poster-breathe { from { transform: scale(1); } to { transform: scale(1.04); } }
