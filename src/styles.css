@@ -63,9 +63,8 @@
 
 @property --intro { syntax: '<time>'; inherits: true; initial-value: 0s; }
 :root {
-  /* Opening sequence: name → poster → curtain. Total wait ~1.5s before the
-     hero — quick reveal, still feels premium. */
-  --intro: 1.5s;
+  /* No opening overlay: existing page animations start without an intro wait. */
+  --intro: 0s;
   --radius: 0.75rem;
   --background: oklch(0.975 0.008 85); /* warm ivory */
   --foreground: oklch(0.28 0.025 45); /* deep brown-charcoal */
