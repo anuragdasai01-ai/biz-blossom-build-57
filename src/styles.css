@@ -63,8 +63,8 @@
 
 @property --intro { syntax: '<time>'; inherits: true; initial-value: 0s; }
 :root {
-  /* No opening overlay: existing page animations start without an intro wait. */
-  --intro: 0s;
+  /* Brief name-and-address introduction, with no poster. */
+  --intro: 1s;
   --radius: 0.75rem;
   --background: oklch(0.975 0.008 85); /* warm ivory */
   --foreground: oklch(0.28 0.025 45); /* deep brown-charcoal */
@@ -225,8 +225,8 @@
   @keyframes hero-float { from { transform: translate(0,0) scale(1); } to { transform: translate(40px,-30px) scale(1.15); } }
   @keyframes hero-sparkle { 0% { opacity: 0; transform: translateY(0) scale(0.6); } 15% { opacity: 0.9; } 85% { opacity: 0.7; } 100% { opacity: 0; transform: translateY(-85vh) scale(1.1); } }
   @keyframes hero-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-  .hero-intro { animation: intro-out 0.8s cubic-bezier(0.76,0,0.24,1) 1.6s forwards; }
-  .hero-intro-name { opacity: 0; letter-spacing: 0.4em; animation: intro-name 0.5s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
+  .hero-intro { animation: intro-out 0.6s cubic-bezier(0.76,0,0.24,1) var(--intro) forwards; }
+  .hero-intro-name { opacity: 0; letter-spacing: 0; animation: intro-name 0.5s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
   .hero-intro-line { transform: scaleX(0); animation: hero-line 0.5s cubic-bezier(0.22,1,0.36,1) 0.18s forwards; }
   .hero-intro-tag { opacity: 0; animation: hero-rise 0.45s ease 0.28s forwards; }
   .hero-intro-poster {
@@ -251,7 +251,7 @@
   .hero-kenburns { animation-delay: var(--intro), calc(var(--intro) + 1.6s) !important; }
   .hero-line { animation-delay: calc(0.4s + var(--intro)); }
   @keyframes intro-out { to { transform: translateY(-100%); visibility: hidden; } }
-  @keyframes intro-name { to { opacity: 1; letter-spacing: 0.05em; } }
+  @keyframes intro-name { from { transform: translateY(10px); } to { opacity: 1; transform: none; } }
   @keyframes hero-drift { from { transform: scale(1) translate(0,0); } to { transform: scale(1.08) translate(-2%,-1%); } }
   @keyframes hero-shine { 0%,60% { background-position: 100% 0; } 100% { background-position: -50% 0; } }
   @keyframes hero-twinkle { 0%,100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.2) rotate(15deg); } }
