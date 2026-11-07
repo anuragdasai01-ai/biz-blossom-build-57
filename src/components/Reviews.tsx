@@ -114,20 +114,22 @@ export function Reviews() {
     return () => io.disconnect();
   }, []);
 
-  // When the user interacts, stop the drift and align the row to the nearest
-  // card so manual browsing starts from a clean position.
+  // When the user interacts, stop the drift; it resumes automatically a few
+  // seconds after the user lets go.
   const pause = useCallback(() => {
     setPaused(true);
     if (resumeTimer.current) clearTimeout(resumeTimer.current);
     resumeTimer.current = setTimeout(() => setPaused(false), RESUME_DELAY_MS);
-    const track = trackRef.current;
-    if (!track) return;
-    const card = track.querySelector("figure");
-    if (!card) return;
-    const step = card.getBoundingClientRect().width + 20; // card + gap
-    const target = Math.round(track.scrollLeft / step) * step;
-    track.scrollTo({ left: target, behavior: "smooth" });
   }, []);
+
+  // Width of one card + gap, and the length of one full set of cards.
+  const stepSize = useCallback(() => {
+    const track = trackRef.current;
+    const card = track?.querySelector("figure");
+    if (!track || !card) return 0;
+    return card.getBoundingClientRect().width + 20; // card + gap
+  }, []);
+  const loopLength = useCallback(() => stepSize() * testimonials.length, [stepSize]);
 
   // Continuous drift: rAF advances scroll position, wrapping seamlessly across
   // the duplicated card list. Paused while the user is interacting. The loop
@@ -162,7 +164,7 @@ export function Reviews() {
         !paused &&
         !reducedMotion.current
       ) {
-        const half = track.scrollWidth / 2;
+        const half = loopLength();
         if (half > 0) {
           acc.current += DRIFT_SPEED;
           if (acc.current >= half) acc.current -= half;
@@ -175,39 +177,48 @@ export function Reviews() {
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [paused]);
+  }, [paused, loopLength]);
 
   useEffect(() => {
     return () => {
       if (resumeTimer.current) clearTimeout(resumeTimer.current);
+      if (settleTimer.current) clearTimeout(settleTimer.current);
     };
   }, []);
 
   // Move exactly one card per swipe/wheel gesture, so a fast flick can never
   // jump from the first testimonial to the last. Native horizontal scrolling
   // is disabled on the track; gestures are handled here.
-  const stepSize = useCallback(() => {
-    const track = trackRef.current;
-    const card = track?.querySelector("figure");
-    if (!track || !card) return 0;
-    return card.getBoundingClientRect().width + 20; // card + gap
-  }, []);
-
+  const targetIndex = useRef<number | null>(null);
+  const settleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollByCard = useCallback(
     (dir: 1 | -1) => {
       const track = trackRef.current;
       if (!track) return;
       const step = stepSize();
       if (!step) return;
-      const half = track.scrollWidth / 2;
-      // Wrap within the duplicated list before animating.
-      if (dir === 1 && track.scrollLeft + step >= half) track.scrollLeft -= half;
-      if (dir === -1 && track.scrollLeft - step < 0) track.scrollLeft += half;
-      const target = Math.round((track.scrollLeft + dir * step) / step) * step;
-      track.scrollTo({ left: target, behavior: "smooth" });
+      const loop = loopLength();
       pause();
+      // Start from the card currently in view (or the card we are already
+      // animating towards), then move exactly one card.
+      let idx = targetIndex.current ?? Math.round(track.scrollLeft / step);
+      // Wrap inside the duplicated list so there is always room to move.
+      if (dir === 1 && idx >= testimonials.length) {
+        idx -= testimonials.length;
+        track.scrollLeft -= loop;
+      } else if (dir === -1 && idx <= 0) {
+        idx += testimonials.length;
+        track.scrollLeft += loop;
+      }
+      const next = idx + dir;
+      targetIndex.current = next;
+      track.scrollTo({ left: next * step, behavior: "smooth" });
+      if (settleTimer.current) clearTimeout(settleTimer.current);
+      settleTimer.current = setTimeout(() => {
+        targetIndex.current = null;
+      }, 600);
     },
-    [pause, stepSize],
+    [pause, stepSize, loopLength],
   );
 
   const touchStartX = useRef<number | null>(null);
@@ -215,7 +226,6 @@ export function Reviews() {
   const wheelLock = useRef(false);
 
   const gestureHandlers = {
-    onPointerDown: pause,
     onMouseEnter: pause,
     onFocus: pause,
     onTouchStart: (e: React.TouchEvent<HTMLDivElement>) => {
@@ -239,14 +249,16 @@ export function Reviews() {
       }
     },
     onWheel: (e: React.WheelEvent<HTMLDivElement>) => {
+      // Only horizontal wheel/trackpad swipes move the carousel; vertical
+      // scrolling keeps scrolling the page.
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
       pause();
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) < 8 || wheelLock.current) return;
+      if (Math.abs(e.deltaX) < 8 || wheelLock.current) return;
       wheelLock.current = true;
       setTimeout(() => {
         wheelLock.current = false;
-      }, 350);
-      scrollByCard(delta > 0 ? 1 : -1);
+      }, 500);
+      scrollByCard(e.deltaX > 0 ? 1 : -1);
     },
   };
 
@@ -288,7 +300,7 @@ export function Reviews() {
         <div data-reveal className="mt-14">
           <div
             {...gestureHandlers}
-            className="-mx-4 snap-x snap-mandatory overflow-x-hidden px-4 pb-2 [touch-action:pan-y] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent,black_32px,black_calc(100%-32px),transparent)]"
+            className="-mx-4 overflow-x-hidden px-4 pb-2 [touch-action:pan-y] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent,black_32px,black_calc(100%-32px),transparent)]"
             ref={trackRef}
             role="region"
             aria-label="Client testimonials carousel"
