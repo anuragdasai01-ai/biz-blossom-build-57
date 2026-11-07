@@ -183,12 +183,71 @@ export function Reviews() {
     };
   }, []);
 
-  const pauseHandlers = {
+  // Move exactly one card per swipe/wheel gesture, so a fast flick can never
+  // jump from the first testimonial to the last. Native horizontal scrolling
+  // is disabled on the track; gestures are handled here.
+  const stepSize = useCallback(() => {
+    const track = trackRef.current;
+    const card = track?.querySelector("figure");
+    if (!track || !card) return 0;
+    return card.getBoundingClientRect().width + 20; // card + gap
+  }, []);
+
+  const scrollByCard = useCallback(
+    (dir: 1 | -1) => {
+      const track = trackRef.current;
+      if (!track) return;
+      const step = stepSize();
+      if (!step) return;
+      const half = track.scrollWidth / 2;
+      // Wrap within the duplicated list before animating.
+      if (dir === 1 && track.scrollLeft + step >= half) track.scrollLeft -= half;
+      if (dir === -1 && track.scrollLeft - step < 0) track.scrollLeft += half;
+      const target = Math.round((track.scrollLeft + dir * step) / step) * step;
+      track.scrollTo({ left: target, behavior: "smooth" });
+      pause();
+    },
+    [pause, stepSize],
+  );
+
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const wheelLock = useRef(false);
+
+  const gestureHandlers = {
     onPointerDown: pause,
-    onTouchStart: pause,
-    onWheel: pause,
     onMouseEnter: pause,
     onFocus: pause,
+    onTouchStart: (e: React.TouchEvent<HTMLDivElement>) => {
+      const t = e.touches[0];
+      if (!t) return;
+      touchStartX.current = t.clientX;
+      touchStartY.current = t.clientY;
+      pause();
+    },
+    onTouchEnd: (e: React.TouchEvent<HTMLDivElement>) => {
+      const startX = touchStartX.current;
+      const startY = touchStartY.current;
+      touchStartX.current = null;
+      touchStartY.current = null;
+      const t = e.changedTouches[0];
+      if (startX == null || startY == null || !t) return;
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (Math.abs(dx) > 24 && Math.abs(dx) > Math.abs(dy)) {
+        scrollByCard(dx < 0 ? 1 : -1);
+      }
+    },
+    onWheel: (e: React.WheelEvent<HTMLDivElement>) => {
+      pause();
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 8 || wheelLock.current) return;
+      wheelLock.current = true;
+      setTimeout(() => {
+        wheelLock.current = false;
+      }, 350);
+      scrollByCard(delta > 0 ? 1 : -1);
+    },
   };
 
   return (
