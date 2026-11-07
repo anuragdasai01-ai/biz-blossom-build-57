@@ -64,7 +64,7 @@
 @property --intro { syntax: '<time>'; inherits: true; initial-value: 0s; }
 :root {
   /* Brief name-and-address introduction, with no poster. */
-  --intro: 1s;
+  --intro: 1.55s;
   --radius: 0.75rem;
   --background: oklch(0.975 0.008 85); /* warm ivory */
   --foreground: oklch(0.28 0.025 45); /* deep brown-charcoal */
@@ -227,8 +227,8 @@
   @keyframes hero-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   .hero-intro { animation: intro-out 0.6s cubic-bezier(0.76,0,0.24,1) var(--intro) forwards; }
   .hero-intro-name { opacity: 0; letter-spacing: 0; animation: intro-name 0.5s cubic-bezier(0.22,1,0.36,1) 0.05s forwards; }
-  .hero-intro-line { transform: scaleX(0); animation: hero-line 0.5s cubic-bezier(0.22,1,0.36,1) 0.18s forwards; }
-  .hero-intro-tag { opacity: 0; animation: hero-rise 0.45s ease 0.28s forwards; }
+  .hero-intro-line { transform: scaleX(0); transform-origin: center; animation: hero-line 0.5s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
+  .hero-intro-tag { opacity: 0; animation: hero-rise 0.4s ease 0.75s forwards; }
   .hero-intro-poster {
     opacity: 0;
     transform: translateY(32px) scale(0.94);
