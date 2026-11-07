@@ -229,7 +229,7 @@ export function Reviews() {
         <div data-reveal className="mt-14">
           <div
             {...pauseHandlers}
-            className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent,black_32px,black_calc(100%-32px),transparent)]"
+            className="-mx-4 snap-x snap-mandatory overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent,black_32px,black_calc(100%-32px),transparent)]"
             ref={trackRef}
             role="region"
             aria-label="Client testimonials carousel"
