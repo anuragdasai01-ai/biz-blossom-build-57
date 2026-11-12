@@ -131,14 +131,14 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`nav-enter fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
-        scrolled
-          ? "border-b border-border/60 bg-background/90 shadow-sm backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+    <header className="nav-enter fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
+      <nav
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-all duration-500 sm:px-5 ${
+          scrolled
+            ? "border-border/80 bg-background/95 shadow-md backdrop-blur-md"
+            : "border-border/60 bg-background/85 shadow-sm backdrop-blur-sm"
+        }`}
+      >
         <a href="#top" className="flex flex-col leading-none">
           <span className="font-display text-[27px] font-semibold tracking-[0.01em] text-foreground sm:text-[32px]">
             {brandTop}
