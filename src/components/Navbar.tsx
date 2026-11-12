@@ -67,12 +67,12 @@ function MoreMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-label="More options"
         aria-expanded={open}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-background/70 text-foreground transition-colors hover:bg-accent"
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-border/70 bg-background/70 text-foreground transition-colors hover:bg-accent"
       >
-        <MoreVertical className="h-[18px] w-[18px]" />
+        <MoreVertical className="h-4 w-4" />
       </button>
       {open && (
-        <div className="absolute right-0 top-12 z-50 w-60 rounded-xl border bg-popover p-2 shadow-lg">
+        <div className="absolute right-0 top-10 z-50 w-60 rounded-xl border bg-popover p-2 shadow-lg">
           <div className="px-4 pb-1 pt-2 font-body text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
             Explore
           </div>
@@ -130,19 +130,19 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="nav-enter fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
+    <header className="nav-enter fixed inset-x-0 top-0 z-40 px-3 pt-2.5 sm:px-6 sm:pt-3.5">
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-all duration-500 sm:px-5 ${
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border px-3.5 py-2 transition-all duration-500 sm:px-5 ${
           scrolled
             ? "border-border/80 bg-background/95 shadow-md backdrop-blur-md"
             : "border-border/60 bg-background/85 shadow-sm backdrop-blur-sm"
         }`}
       >
         <a href="#top" className="flex min-w-0 flex-col leading-none">
-          <span className="font-display text-[30px] font-semibold tracking-[0.015em] text-foreground sm:text-[34px]">
+          <span className="font-display text-[21px] font-semibold tracking-[0.015em] text-foreground sm:text-[26px]">
             {brandTop}
           </span>
-          <span className="mt-[6px] font-body text-[10px] font-medium uppercase tracking-[0.3em] text-primary sm:text-[11px] sm:tracking-[0.34em]">
+          <span className="mt-[3px] font-body text-[8px] font-medium uppercase tracking-[0.26em] text-primary sm:text-[9px] sm:tracking-[0.3em]">
             {brandSub}
           </span>
         </a>
@@ -162,7 +162,7 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-2.5">
           <button
             onClick={() => openBooking()}
-            className="inline-flex shrink-0 items-center rounded-full bg-primary px-4 py-2 text-xs font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex shrink-0 items-center rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:px-5 sm:py-2 sm:text-[13px]"
           >
             Book Appointment
           </button>
