@@ -8,7 +8,6 @@ import {
   Facebook,
   Share2,
   Clock,
-  CalendarCheck,
 } from "lucide-react";
 import { business, links } from "@/config/business";
 import { useBooking } from "@/lib/booking";
