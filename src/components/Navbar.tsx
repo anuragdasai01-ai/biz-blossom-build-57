@@ -67,12 +67,12 @@ function MoreMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-label="More options"
         aria-expanded={open}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-background/70 text-foreground transition-colors hover:bg-accent"
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-border/70 bg-background/70 text-foreground transition-colors hover:bg-accent"
       >
-        <MoreVertical className="h-[18px] w-[18px]" />
+        <MoreVertical className="h-4 w-4" />
       </button>
       {open && (
-        <div className="absolute right-0 top-12 z-50 w-60 rounded-xl border bg-popover p-2 shadow-lg">
+        <div className="absolute right-0 top-10 z-50 w-60 rounded-xl border bg-popover p-2 shadow-lg">
           <div className="px-4 pb-1 pt-2 font-body text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
             Explore
           </div>
