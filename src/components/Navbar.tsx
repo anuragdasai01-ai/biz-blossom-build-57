@@ -162,7 +162,7 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-2.5">
           <button
             onClick={() => openBooking()}
-            className="inline-flex shrink-0 items-center rounded-full bg-primary px-4 py-2 text-xs font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex shrink-0 items-center rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:px-5 sm:py-2 sm:text-[13px]"
           >
             Book Appointment
           </button>
