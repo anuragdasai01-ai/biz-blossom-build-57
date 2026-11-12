@@ -15,16 +15,14 @@ export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div aria-hidden="true" className="hero-intro fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-background px-5">
-        <div className="hero-intro-head flex flex-col items-center text-center">
-          <span className="hero-intro-name font-display text-4xl font-semibold leading-[0.95] text-foreground sm:text-6xl">
-            {business.name.split(" ").map((word) => (
-              <span key={word} className="block">
-                {word}
-              </span>
-            ))}
+        <div className="hero-intro-head flex w-full max-w-[22rem] flex-col items-center text-center">
+          <span className="hero-intro-name font-display text-4xl font-semibold text-foreground sm:text-6xl">
+            {business.name.split(" ").slice(0, -1).join(" ")}
+            <br />
+            {business.name.split(" ").at(-1)}
           </span>
           <span className="hero-intro-line mt-5 block h-px w-40 bg-primary" />
-          <span className="hero-intro-tag mt-5 text-xs font-medium leading-relaxed text-muted-foreground sm:text-sm">
+          <span className="hero-intro-tag mx-auto mt-5 block w-full max-w-[20rem] text-center text-xs font-medium leading-relaxed text-muted-foreground sm:text-sm">
             {business.address.line1}
             <br />
             {business.address.line2}, {business.address.city}
