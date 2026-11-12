@@ -9,8 +9,6 @@ import {
   Share2,
   Clock,
   CalendarCheck,
-  Menu,
-  X,
 } from "lucide-react";
 import { business, links } from "@/config/business";
 import { useBooking } from "@/lib/booking";
@@ -22,6 +20,11 @@ const navItems = [
   { label: "Reviews", href: "#reviews" },
   { label: "Visit Us", href: "#visit" },
 ];
+
+// Name-only brand lockup: the studio's own words, no mark. First word carries
+// the display serif, the rest sits beneath it in letterspaced capitals.
+const [brandTop, ...brandTail] = business.name.split(" ");
+const brandSub = brandTail.join(" ");
 
 function MoreMenu() {
   const [open, setOpen] = useState(false);
@@ -65,12 +68,26 @@ function MoreMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-label="More options"
         aria-expanded={open}
-        className="flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-accent"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-background/70 text-foreground transition-colors hover:bg-accent"
       >
-        <MoreVertical className="h-5 w-5" />
+        <MoreVertical className="h-[18px] w-[18px]" />
       </button>
       {open && (
-        <div className="absolute right-0 top-12 z-50 w-56 rounded-xl border bg-popover p-2 shadow-lg">
+        <div className="absolute right-0 top-12 z-50 w-60 rounded-xl border bg-popover p-2 shadow-lg">
+          <div className="px-4 pb-1 pt-2 font-body text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+            Explore
+          </div>
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className={itemCls}
+            >
+              {item.label}
+            </a>
+          ))}
+          <div className="my-2 h-px bg-border" />
           {business.instagram && (
             <a href={business.instagram} target="_blank" rel="noreferrer" className={itemCls}>
               <Instagram className="h-4 w-4 text-primary" /> Instagram
@@ -105,7 +122,6 @@ function MoreMenu() {
 export function Navbar() {
   const { openBooking } = useBooking();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -117,69 +133,44 @@ export function Navbar() {
   return (
     <header
       className={`nav-enter fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
-        scrolled ? "bg-background/90 shadow-sm backdrop-blur-md" : "bg-transparent"
+        scrolled
+          ? "border-b border-border/60 bg-background/90 shadow-sm backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#top" className="font-display text-xl font-semibold tracking-wide text-foreground sm:text-2xl">
-          {business.name}
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+        <a href="#top" className="flex flex-col leading-none">
+          <span className="font-display text-[27px] font-semibold tracking-[0.01em] text-foreground sm:text-[32px]">
+            {brandTop}
+          </span>
+          <span className="mt-[5px] font-body text-[9px] font-medium uppercase tracking-[0.34em] text-muted-foreground sm:text-[10px]">
+            {brandSub}
+          </span>
         </a>
 
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-medium tracking-wide text-muted-foreground transition-colors hover:text-foreground"
             >
               {item.label}
             </a>
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2.5">
           <button
             onClick={() => openBooking()}
-            className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:inline-flex"
+            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
           >
-            <CalendarCheck className="h-4 w-4" />
+            <CalendarCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             Book Appointment
-          </button>
-          <button
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground hover:bg-accent lg:hidden"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
           <MoreMenu />
         </div>
       </nav>
-
-      {mobileOpen && (
-        <div className="mobile-menu-enter border-t bg-background/95 px-4 pb-6 pt-3 backdrop-blur-md lg:hidden">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className="block rounded-lg px-3 py-3 text-base font-medium text-foreground hover:bg-accent"
-            >
-              {item.label}
-            </a>
-          ))}
-          <button
-            onClick={() => {
-              setMobileOpen(false);
-              openBooking();
-            }}
-            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground"
-          >
-            <CalendarCheck className="h-4 w-4" />
-            Book Appointment
-          </button>
-        </div>
-      )}
     </header>
   );
 }
