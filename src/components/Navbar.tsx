@@ -8,7 +8,6 @@ import {
   Facebook,
   Share2,
   Clock,
-  CalendarCheck,
 } from "lucide-react";
 import { business, links } from "@/config/business";
 import { useBooking } from "@/lib/booking";
@@ -139,11 +138,11 @@ export function Navbar() {
             : "border-border/60 bg-background/85 shadow-sm backdrop-blur-sm"
         }`}
       >
-        <a href="#top" className="flex flex-col leading-none">
-          <span className="font-display text-[27px] font-semibold tracking-[0.01em] text-foreground sm:text-[32px]">
+        <a href="#top" className="flex min-w-0 flex-col leading-none">
+          <span className="font-display text-[30px] font-semibold tracking-[0.015em] text-foreground sm:text-[34px]">
             {brandTop}
           </span>
-          <span className="mt-[5px] font-body text-[9px] font-medium uppercase tracking-[0.34em] text-muted-foreground sm:text-[10px]">
+          <span className="mt-[6px] font-body text-[10px] font-medium uppercase tracking-[0.3em] text-primary sm:text-[11px] sm:tracking-[0.34em]">
             {brandSub}
           </span>
         </a>
@@ -163,9 +162,8 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-2.5">
           <button
             onClick={() => openBooking()}
-            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex shrink-0 items-center rounded-full bg-primary px-4 py-2 text-xs font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
           >
-            <CalendarCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             Book Appointment
           </button>
           <MoreMenu />
