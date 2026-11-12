@@ -16,8 +16,12 @@ export function Hero() {
     <section id="top" className="relative overflow-hidden">
       <div aria-hidden="true" className="hero-intro fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-background px-5">
         <div className="hero-intro-head flex flex-col items-center text-center">
-          <span className="hero-intro-name font-display text-4xl font-semibold text-foreground sm:text-6xl">
-            {business.name}
+          <span className="hero-intro-name font-display text-4xl font-semibold leading-[0.95] text-foreground sm:text-6xl">
+            {business.name.split(" ").map((word) => (
+              <span key={word} className="block">
+                {word}
+              </span>
+            ))}
           </span>
           <span className="hero-intro-line mt-5 block h-px w-40 bg-primary" />
           <span className="hero-intro-tag mt-5 text-xs font-medium leading-relaxed text-muted-foreground sm:text-sm">
