@@ -139,10 +139,10 @@ export function Navbar() {
         }`}
       >
         <a href="#top" className="flex min-w-0 flex-col leading-none">
-          <span className="font-display text-[30px] font-semibold tracking-[0.015em] text-foreground sm:text-[34px]">
+          <span className="font-display text-[21px] font-semibold tracking-[0.015em] text-foreground sm:text-[26px]">
             {brandTop}
           </span>
-          <span className="mt-[6px] font-body text-[10px] font-medium uppercase tracking-[0.3em] text-primary sm:text-[11px] sm:tracking-[0.34em]">
+          <span className="mt-[3px] font-body text-[8px] font-medium uppercase tracking-[0.26em] text-primary sm:text-[9px] sm:tracking-[0.3em]">
             {brandSub}
           </span>
         </a>
