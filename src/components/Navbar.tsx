@@ -163,9 +163,8 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-2.5">
           <button
             onClick={() => openBooking()}
-            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex shrink-0 items-center rounded-full bg-primary px-4 py-2 text-xs font-medium tracking-wide text-primary-foreground shadow-sm transition-all hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
           >
-            <CalendarCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             Book Appointment
           </button>
           <MoreMenu />
